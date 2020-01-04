@@ -1,0 +1,11 @@
+version: '2'
+services:
+  vuwsmt-postgresql:
+    image: postgres:11.5
+    # volumes:
+    #     - ~/volumes/jhipster/vuwsmt/postgresql/:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_USER=vuwsmt
+      - POSTGRES_PASSWORD=
+    ports:
+      - 5432:5432
