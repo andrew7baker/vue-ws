@@ -25,6 +25,18 @@ const JhiAuditsComponent = () => import('../admin/audits/audits.vue');
 const JhiMetricsComponent = () => import('../admin/metrics/metrics.vue');
 const JhiTrackerComponent = () => import('../admin/tracker/tracker.vue');
 /* tslint:disable */
+// prettier-ignore
+const BmtChangCi = () => import('../entities/bmt-chang-ci/bmt-chang-ci.vue');
+// prettier-ignore
+const BmtChangCiUpdate = () => import('../entities/bmt-chang-ci/bmt-chang-ci-update.vue');
+// prettier-ignore
+const BmtChangCiDetails = () => import('../entities/bmt-chang-ci/bmt-chang-ci-details.vue');
+// prettier-ignore
+const BmtPayRecord = () => import('../entities/bmt-pay-record/bmt-pay-record.vue');
+// prettier-ignore
+const BmtPayRecordUpdate = () => import('../entities/bmt-pay-record/bmt-pay-record-update.vue');
+// prettier-ignore
+const BmtPayRecordDetails = () => import('../entities/bmt-pay-record/bmt-pay-record-details.vue');
 // jhipster-needle-add-entity-to-router-import - JHipster will import entities to the router here
 
 Vue.use(Router);
@@ -148,6 +160,56 @@ export default new Router({
       name: 'JhiTrackerComponent',
       component: JhiTrackerComponent,
       meta: { authorities: ['ROLE_ADMIN'] }
+    }
+    ,
+    {
+      path: '/bmt-chang-ci',
+      name: 'BmtChangCi',
+      component: BmtChangCi,
+      meta: { authorities: ['ROLE_USER'] }
+    },
+    {
+      path: '/bmt-chang-ci/new',
+      name: 'BmtChangCiCreate',
+      component: BmtChangCiUpdate,
+      meta: { authorities: ['ROLE_USER'] }
+    },
+    {
+      path: '/bmt-chang-ci/:bmtChangCiId/edit',
+      name: 'BmtChangCiEdit',
+      component: BmtChangCiUpdate,
+      meta: { authorities: ['ROLE_USER'] }
+    },
+    {
+      path: '/bmt-chang-ci/:bmtChangCiId/view',
+      name: 'BmtChangCiView',
+      component: BmtChangCiDetails,
+      meta: { authorities: ['ROLE_USER'] }
+    }
+    ,
+    {
+      path: '/bmt-pay-record',
+      name: 'BmtPayRecord',
+      component: BmtPayRecord,
+      meta: { authorities: ['ROLE_USER'] }
+    },
+    {
+      path: '/bmt-pay-record/new',
+      name: 'BmtPayRecordCreate',
+      component: BmtPayRecordUpdate,
+      meta: { authorities: ['ROLE_USER'] }
+    },
+    {
+      path: '/bmt-pay-record/:bmtPayRecordId/edit',
+      name: 'BmtPayRecordEdit',
+      component: BmtPayRecordUpdate,
+      meta: { authorities: ['ROLE_USER'] }
+    },
+    {
+      path: '/bmt-pay-record/:bmtPayRecordId/view',
+      name: 'BmtPayRecordView',
+      component: BmtPayRecordDetails,
+      meta: { authorities: ['ROLE_USER'] }
     }
     // jhipster-needle-add-entity-to-router - JHipster will add entities to the router here
   ]

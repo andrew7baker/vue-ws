@@ -1,0 +1,40 @@
+{
+    "name": "BmtPayRecord",
+    "fields": [
+        {
+            "fieldName": "payTime",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "payPersonId",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "payPersonName",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "payAmount",
+            "fieldType": "Long"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "bmtChangCi",
+            "otherEntityRelationshipName": "bmtPayRecord",
+            "relationshipName": "bmtChangCi",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20200105063843",
+    "entityTableName": "bmt_pay_record",
+    "dto": "no",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}
