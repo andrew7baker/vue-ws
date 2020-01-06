@@ -1,6 +1,7 @@
 package com.mycompany.myapp.web.rest;
 
 import com.alibaba.fastjson.JSON;
+import com.mycompany.myapp.domain.BmtPayRecord;
 import org.apache.commons.net.ftp.*;
 import org.jdbi.v3.core.Jdbi;
 import org.slf4j.Logger;
@@ -182,12 +183,33 @@ public class BmtChangCiReportResource {
         Map<String, Object> map = new HashMap<>(3);
         String[] arr = {"", "Kia", "Nissan", "Toyota", "Honda", "Mazda", "Ford"};
 
-        String[][] arrStr=new String[3][4];
-        arrStr[0][1]="1";
-        arrStr[0][2]="2";
-        arrStr[1][2]="3";
-        arrStr[1][1]="4";
+//        Jdbi jdbi = Jdbi.create("jdbc:postgresql://tx:5432/smt?", "smt", "smt");
+//        log.info("jdbi"+jdbi);
+//
+//        List<BmtPayRecord> list =jdbi.withHandle(handle ->
+//            handle.createQuery("select * from bmt_pay_record ")
+//                .mapToBean(BmtPayRecord.class)
+//                .list());
+//
+//        log.info("list"+list);
+
+
+        String[][] arrStr=new String[3][5];
+        arrStr[0][0]="付款时间";
+        arrStr[0][1]="付款人ID";
+        arrStr[0][2]="付款人";
+        arrStr[0][3]="金额";
+        arrStr[0][4]="场次";
+        arrStr[1][0]="1月2日";
+        arrStr[1][1]="3";
+        arrStr[1][2]="九三";
+        arrStr[1][3]="35";
+        arrStr[1][4]="四号场地";
+        arrStr[2][0]="5";
+        arrStr[2][1]="5";
+        arrStr[2][2]="5";
         arrStr[2][3]="5";
+        arrStr[2][4]="5";
         map.put("data", arrStr);
 
         return map;
