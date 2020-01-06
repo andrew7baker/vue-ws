@@ -170,7 +170,27 @@ public class BmtChangCiReportResource {
         data2.put("changDiName","5号场地周日");
         data.put("payChangDis",new Object[]{data1,data2});
         String s = JSON.toJSONString(data);
+
+
+        s ="{'data': [['', 'Kia', 'Nissan', 'Toyota', 'Honda', 'Mazda', 'Ford'],['2016', 10, 11, 12, 13, 15, 16]]}";
+
         return s;
+    }
+
+    @GetMapping("/hansontable")
+    public Map<String, Object> getMap() {
+        Map<String, Object> map = new HashMap<>(3);
+        String[] arr = {"", "Kia", "Nissan", "Toyota", "Honda", "Mazda", "Ford"};
+
+        String[][] arrStr=new String[3][4];
+        arrStr[0][1]="1";
+        arrStr[0][2]="2";
+        arrStr[1][2]="3";
+        arrStr[1][1]="4";
+        arrStr[2][3]="5";
+        map.put("data", arrStr);
+
+        return map;
     }
 
 }
