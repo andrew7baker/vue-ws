@@ -183,16 +183,14 @@ public class BmtChangCiReportResource {
         Map<String, Object> map = new HashMap<>(3);
         String[] arr = {"", "Kia", "Nissan", "Toyota", "Honda", "Mazda", "Ford"};
 
-//        Jdbi jdbi = Jdbi.create("jdbc:postgresql://tx:5432/smt?", "smt", "smt");
-//        log.info("jdbi"+jdbi);
-//
-//        List<BmtPayRecord> list =jdbi.withHandle(handle ->
-//            handle.createQuery("select * from bmt_pay_record ")
-//                .mapToBean(BmtPayRecord.class)
-//                .list());
-//
-//        log.info("list"+list);
+        Jdbi jdbi = Jdbi.create("jdbc:postgresql://tx:5432/smt?", "smt", "smt");
+        log.info("jdbi"+jdbi);
 
+        List<BmtPayRecord> list =jdbi.withHandle(handle ->
+            handle.createQuery("select * from bmt_pay_record ")
+                .mapToBean(BmtPayRecord.class)
+                .list());
+        log.info("list"+list);
 
         String[][] arrStr=new String[3][5];
         arrStr[0][0]="付款时间";
