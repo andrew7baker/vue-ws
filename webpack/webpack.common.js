@@ -90,6 +90,7 @@ module.exports = {
       { from: './src/main/webapp/swagger-ui/', to: 'swagger-ui' },
       { from: './src/main/webapp/content/', to: 'content' },
       { from: './src/main/webapp/favicon.ico', to: 'favicon.ico' },
+      { from: './src/main/webapp/smt2', to: 'smt' },
       {
         from: './src/main/webapp/manifest.webapp',
         to: 'manifest.webapp'
