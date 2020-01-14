@@ -49,11 +49,20 @@ public class ProductionResourceIT {
     private static final Integer DEFAULT_RUN_TIME = 1;
     private static final Integer UPDATED_RUN_TIME = 2;
 
+    private static final Integer DEFAULT_STOP_TIME = 1;
+    private static final Integer UPDATED_STOP_TIME = 2;
+
     private static final Integer DEFAULT_IDLE_TIME = 1;
     private static final Integer UPDATED_IDLE_TIME = 2;
 
     private static final Integer DEFAULT_IN_WAIT_TIME = 1;
     private static final Integer UPDATED_IN_WAIT_TIME = 2;
+
+    private static final Integer DEFAULT_OUT_WAIT_TIME = 1;
+    private static final Integer UPDATED_OUT_WAIT_TIME = 2;
+
+    private static final Integer DEFAULT_TRANS_TIME = 1;
+    private static final Integer UPDATED_TRANS_TIME = 2;
 
     private static final Integer DEFAULT_WRONG_STOP_TIME = 1;
     private static final Integer UPDATED_WRONG_STOP_TIME = 2;
@@ -69,6 +78,9 @@ public class ProductionResourceIT {
 
     private static final Integer DEFAULT_PANEL_IN_COUNT = 1;
     private static final Integer UPDATED_PANEL_IN_COUNT = 2;
+
+    private static final Integer DEFAULT_PANEL_OUT_COUNT = 1;
+    private static final Integer UPDATED_PANEL_OUT_COUNT = 2;
 
     private static final Integer DEFAULT_PANEL_COUNT = 1;
     private static final Integer UPDATED_PANEL_COUNT = 2;
@@ -153,13 +165,17 @@ public class ProductionResourceIT {
             .placeTime(DEFAULT_PLACE_TIME)
             .waitTime(DEFAULT_WAIT_TIME)
             .runTime(DEFAULT_RUN_TIME)
+            .stopTime(DEFAULT_STOP_TIME)
             .idleTime(DEFAULT_IDLE_TIME)
             .inWaitTime(DEFAULT_IN_WAIT_TIME)
+            .outWaitTime(DEFAULT_OUT_WAIT_TIME)
+            .transTime(DEFAULT_TRANS_TIME)
             .wrongStopTime(DEFAULT_WRONG_STOP_TIME)
             .errorStopTIme(DEFAULT_ERROR_STOP_T_IME)
             .wrongStopCount(DEFAULT_WRONG_STOP_COUNT)
             .errorStopCount(DEFAULT_ERROR_STOP_COUNT)
             .panelInCount(DEFAULT_PANEL_IN_COUNT)
+            .panelOutCount(DEFAULT_PANEL_OUT_COUNT)
             .panelCount(DEFAULT_PANEL_COUNT)
             .pCBCount(DEFAULT_P_CB_COUNT)
             .errorPcb(DEFAULT_ERROR_PCB)
@@ -186,13 +202,17 @@ public class ProductionResourceIT {
             .placeTime(UPDATED_PLACE_TIME)
             .waitTime(UPDATED_WAIT_TIME)
             .runTime(UPDATED_RUN_TIME)
+            .stopTime(UPDATED_STOP_TIME)
             .idleTime(UPDATED_IDLE_TIME)
             .inWaitTime(UPDATED_IN_WAIT_TIME)
+            .outWaitTime(UPDATED_OUT_WAIT_TIME)
+            .transTime(UPDATED_TRANS_TIME)
             .wrongStopTime(UPDATED_WRONG_STOP_TIME)
             .errorStopTIme(UPDATED_ERROR_STOP_T_IME)
             .wrongStopCount(UPDATED_WRONG_STOP_COUNT)
             .errorStopCount(UPDATED_ERROR_STOP_COUNT)
             .panelInCount(UPDATED_PANEL_IN_COUNT)
+            .panelOutCount(UPDATED_PANEL_OUT_COUNT)
             .panelCount(UPDATED_PANEL_COUNT)
             .pCBCount(UPDATED_P_CB_COUNT)
             .errorPcb(UPDATED_ERROR_PCB)
@@ -232,13 +252,17 @@ public class ProductionResourceIT {
         assertThat(testProduction.getPlaceTime()).isEqualTo(DEFAULT_PLACE_TIME);
         assertThat(testProduction.getWaitTime()).isEqualTo(DEFAULT_WAIT_TIME);
         assertThat(testProduction.getRunTime()).isEqualTo(DEFAULT_RUN_TIME);
+        assertThat(testProduction.getStopTime()).isEqualTo(DEFAULT_STOP_TIME);
         assertThat(testProduction.getIdleTime()).isEqualTo(DEFAULT_IDLE_TIME);
         assertThat(testProduction.getInWaitTime()).isEqualTo(DEFAULT_IN_WAIT_TIME);
+        assertThat(testProduction.getOutWaitTime()).isEqualTo(DEFAULT_OUT_WAIT_TIME);
+        assertThat(testProduction.getTransTime()).isEqualTo(DEFAULT_TRANS_TIME);
         assertThat(testProduction.getWrongStopTime()).isEqualTo(DEFAULT_WRONG_STOP_TIME);
         assertThat(testProduction.getErrorStopTIme()).isEqualTo(DEFAULT_ERROR_STOP_T_IME);
         assertThat(testProduction.getWrongStopCount()).isEqualTo(DEFAULT_WRONG_STOP_COUNT);
         assertThat(testProduction.getErrorStopCount()).isEqualTo(DEFAULT_ERROR_STOP_COUNT);
         assertThat(testProduction.getPanelInCount()).isEqualTo(DEFAULT_PANEL_IN_COUNT);
+        assertThat(testProduction.getPanelOutCount()).isEqualTo(DEFAULT_PANEL_OUT_COUNT);
         assertThat(testProduction.getPanelCount()).isEqualTo(DEFAULT_PANEL_COUNT);
         assertThat(testProduction.getpCBCount()).isEqualTo(DEFAULT_P_CB_COUNT);
         assertThat(testProduction.getErrorPcb()).isEqualTo(DEFAULT_ERROR_PCB);
@@ -288,13 +312,17 @@ public class ProductionResourceIT {
             .andExpect(jsonPath("$.[*].placeTime").value(hasItem(DEFAULT_PLACE_TIME)))
             .andExpect(jsonPath("$.[*].waitTime").value(hasItem(DEFAULT_WAIT_TIME)))
             .andExpect(jsonPath("$.[*].runTime").value(hasItem(DEFAULT_RUN_TIME)))
+            .andExpect(jsonPath("$.[*].stopTime").value(hasItem(DEFAULT_STOP_TIME)))
             .andExpect(jsonPath("$.[*].idleTime").value(hasItem(DEFAULT_IDLE_TIME)))
             .andExpect(jsonPath("$.[*].inWaitTime").value(hasItem(DEFAULT_IN_WAIT_TIME)))
+            .andExpect(jsonPath("$.[*].outWaitTime").value(hasItem(DEFAULT_OUT_WAIT_TIME)))
+            .andExpect(jsonPath("$.[*].transTime").value(hasItem(DEFAULT_TRANS_TIME)))
             .andExpect(jsonPath("$.[*].wrongStopTime").value(hasItem(DEFAULT_WRONG_STOP_TIME)))
             .andExpect(jsonPath("$.[*].errorStopTIme").value(hasItem(DEFAULT_ERROR_STOP_T_IME)))
             .andExpect(jsonPath("$.[*].wrongStopCount").value(hasItem(DEFAULT_WRONG_STOP_COUNT)))
             .andExpect(jsonPath("$.[*].errorStopCount").value(hasItem(DEFAULT_ERROR_STOP_COUNT)))
             .andExpect(jsonPath("$.[*].panelInCount").value(hasItem(DEFAULT_PANEL_IN_COUNT)))
+            .andExpect(jsonPath("$.[*].panelOutCount").value(hasItem(DEFAULT_PANEL_OUT_COUNT)))
             .andExpect(jsonPath("$.[*].panelCount").value(hasItem(DEFAULT_PANEL_COUNT)))
             .andExpect(jsonPath("$.[*].pCBCount").value(hasItem(DEFAULT_P_CB_COUNT)))
             .andExpect(jsonPath("$.[*].errorPcb").value(hasItem(DEFAULT_ERROR_PCB)))
@@ -324,13 +352,17 @@ public class ProductionResourceIT {
             .andExpect(jsonPath("$.placeTime").value(DEFAULT_PLACE_TIME))
             .andExpect(jsonPath("$.waitTime").value(DEFAULT_WAIT_TIME))
             .andExpect(jsonPath("$.runTime").value(DEFAULT_RUN_TIME))
+            .andExpect(jsonPath("$.stopTime").value(DEFAULT_STOP_TIME))
             .andExpect(jsonPath("$.idleTime").value(DEFAULT_IDLE_TIME))
             .andExpect(jsonPath("$.inWaitTime").value(DEFAULT_IN_WAIT_TIME))
+            .andExpect(jsonPath("$.outWaitTime").value(DEFAULT_OUT_WAIT_TIME))
+            .andExpect(jsonPath("$.transTime").value(DEFAULT_TRANS_TIME))
             .andExpect(jsonPath("$.wrongStopTime").value(DEFAULT_WRONG_STOP_TIME))
             .andExpect(jsonPath("$.errorStopTIme").value(DEFAULT_ERROR_STOP_T_IME))
             .andExpect(jsonPath("$.wrongStopCount").value(DEFAULT_WRONG_STOP_COUNT))
             .andExpect(jsonPath("$.errorStopCount").value(DEFAULT_ERROR_STOP_COUNT))
             .andExpect(jsonPath("$.panelInCount").value(DEFAULT_PANEL_IN_COUNT))
+            .andExpect(jsonPath("$.panelOutCount").value(DEFAULT_PANEL_OUT_COUNT))
             .andExpect(jsonPath("$.panelCount").value(DEFAULT_PANEL_COUNT))
             .andExpect(jsonPath("$.pCBCount").value(DEFAULT_P_CB_COUNT))
             .andExpect(jsonPath("$.errorPcb").value(DEFAULT_ERROR_PCB))
@@ -370,13 +402,17 @@ public class ProductionResourceIT {
             .placeTime(UPDATED_PLACE_TIME)
             .waitTime(UPDATED_WAIT_TIME)
             .runTime(UPDATED_RUN_TIME)
+            .stopTime(UPDATED_STOP_TIME)
             .idleTime(UPDATED_IDLE_TIME)
             .inWaitTime(UPDATED_IN_WAIT_TIME)
+            .outWaitTime(UPDATED_OUT_WAIT_TIME)
+            .transTime(UPDATED_TRANS_TIME)
             .wrongStopTime(UPDATED_WRONG_STOP_TIME)
             .errorStopTIme(UPDATED_ERROR_STOP_T_IME)
             .wrongStopCount(UPDATED_WRONG_STOP_COUNT)
             .errorStopCount(UPDATED_ERROR_STOP_COUNT)
             .panelInCount(UPDATED_PANEL_IN_COUNT)
+            .panelOutCount(UPDATED_PANEL_OUT_COUNT)
             .panelCount(UPDATED_PANEL_COUNT)
             .pCBCount(UPDATED_P_CB_COUNT)
             .errorPcb(UPDATED_ERROR_PCB)
@@ -403,13 +439,17 @@ public class ProductionResourceIT {
         assertThat(testProduction.getPlaceTime()).isEqualTo(UPDATED_PLACE_TIME);
         assertThat(testProduction.getWaitTime()).isEqualTo(UPDATED_WAIT_TIME);
         assertThat(testProduction.getRunTime()).isEqualTo(UPDATED_RUN_TIME);
+        assertThat(testProduction.getStopTime()).isEqualTo(UPDATED_STOP_TIME);
         assertThat(testProduction.getIdleTime()).isEqualTo(UPDATED_IDLE_TIME);
         assertThat(testProduction.getInWaitTime()).isEqualTo(UPDATED_IN_WAIT_TIME);
+        assertThat(testProduction.getOutWaitTime()).isEqualTo(UPDATED_OUT_WAIT_TIME);
+        assertThat(testProduction.getTransTime()).isEqualTo(UPDATED_TRANS_TIME);
         assertThat(testProduction.getWrongStopTime()).isEqualTo(UPDATED_WRONG_STOP_TIME);
         assertThat(testProduction.getErrorStopTIme()).isEqualTo(UPDATED_ERROR_STOP_T_IME);
         assertThat(testProduction.getWrongStopCount()).isEqualTo(UPDATED_WRONG_STOP_COUNT);
         assertThat(testProduction.getErrorStopCount()).isEqualTo(UPDATED_ERROR_STOP_COUNT);
         assertThat(testProduction.getPanelInCount()).isEqualTo(UPDATED_PANEL_IN_COUNT);
+        assertThat(testProduction.getPanelOutCount()).isEqualTo(UPDATED_PANEL_OUT_COUNT);
         assertThat(testProduction.getPanelCount()).isEqualTo(UPDATED_PANEL_COUNT);
         assertThat(testProduction.getpCBCount()).isEqualTo(UPDATED_P_CB_COUNT);
         assertThat(testProduction.getErrorPcb()).isEqualTo(UPDATED_ERROR_PCB);

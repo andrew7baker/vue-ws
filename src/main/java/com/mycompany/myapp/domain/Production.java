@@ -36,11 +36,20 @@ public class Production implements Serializable {
     @Column(name = "run_time")
     private Integer runTime;
 
+    @Column(name = "stop_time")
+    private Integer stopTime;
+
     @Column(name = "idle_time")
     private Integer idleTime;
 
     @Column(name = "in_wait_time")
     private Integer inWaitTime;
+
+    @Column(name = "out_wait_time")
+    private Integer outWaitTime;
+
+    @Column(name = "trans_time")
+    private Integer transTime;
 
     @Column(name = "wrong_stop_time")
     private Integer wrongStopTime;
@@ -56,6 +65,9 @@ public class Production implements Serializable {
 
     @Column(name = "panel_in_count")
     private Integer panelInCount;
+
+    @Column(name = "panel_out_count")
+    private Integer panelOutCount;
 
     @Column(name = "panel_count")
     private Integer panelCount;
@@ -164,6 +176,19 @@ public class Production implements Serializable {
         this.runTime = runTime;
     }
 
+    public Integer getStopTime() {
+        return stopTime;
+    }
+
+    public Production stopTime(Integer stopTime) {
+        this.stopTime = stopTime;
+        return this;
+    }
+
+    public void setStopTime(Integer stopTime) {
+        this.stopTime = stopTime;
+    }
+
     public Integer getIdleTime() {
         return idleTime;
     }
@@ -188,6 +213,32 @@ public class Production implements Serializable {
 
     public void setInWaitTime(Integer inWaitTime) {
         this.inWaitTime = inWaitTime;
+    }
+
+    public Integer getOutWaitTime() {
+        return outWaitTime;
+    }
+
+    public Production outWaitTime(Integer outWaitTime) {
+        this.outWaitTime = outWaitTime;
+        return this;
+    }
+
+    public void setOutWaitTime(Integer outWaitTime) {
+        this.outWaitTime = outWaitTime;
+    }
+
+    public Integer getTransTime() {
+        return transTime;
+    }
+
+    public Production transTime(Integer transTime) {
+        this.transTime = transTime;
+        return this;
+    }
+
+    public void setTransTime(Integer transTime) {
+        this.transTime = transTime;
     }
 
     public Integer getWrongStopTime() {
@@ -253,6 +304,19 @@ public class Production implements Serializable {
 
     public void setPanelInCount(Integer panelInCount) {
         this.panelInCount = panelInCount;
+    }
+
+    public Integer getPanelOutCount() {
+        return panelOutCount;
+    }
+
+    public Production panelOutCount(Integer panelOutCount) {
+        this.panelOutCount = panelOutCount;
+        return this;
+    }
+
+    public void setPanelOutCount(Integer panelOutCount) {
+        this.panelOutCount = panelOutCount;
     }
 
     public Integer getPanelCount() {
@@ -424,13 +488,17 @@ public class Production implements Serializable {
             ", placeTime=" + getPlaceTime() +
             ", waitTime=" + getWaitTime() +
             ", runTime=" + getRunTime() +
+            ", stopTime=" + getStopTime() +
             ", idleTime=" + getIdleTime() +
             ", inWaitTime=" + getInWaitTime() +
+            ", outWaitTime=" + getOutWaitTime() +
+            ", transTime=" + getTransTime() +
             ", wrongStopTime=" + getWrongStopTime() +
             ", errorStopTIme=" + getErrorStopTIme() +
             ", wrongStopCount=" + getWrongStopCount() +
             ", errorStopCount=" + getErrorStopCount() +
             ", panelInCount=" + getPanelInCount() +
+            ", panelOutCount=" + getPanelOutCount() +
             ", panelCount=" + getPanelCount() +
             ", pCBCount=" + getpCBCount() +
             ", errorPcb=" + getErrorPcb() +

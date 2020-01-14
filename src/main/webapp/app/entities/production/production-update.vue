@@ -35,6 +35,11 @@
                             :class="{'valid': !$v.production.runTime.$invalid, 'invalid': $v.production.runTime.$invalid }" v-model.number="$v.production.runTime.$model" />
                     </div>
                     <div class="form-group">
+                        <label class="form-control-label" for="production-stopTime">Stop Time</label>
+                        <input type="number" class="form-control" name="stopTime" id="production-stopTime"
+                            :class="{'valid': !$v.production.stopTime.$invalid, 'invalid': $v.production.stopTime.$invalid }" v-model.number="$v.production.stopTime.$model" />
+                    </div>
+                    <div class="form-group">
                         <label class="form-control-label" for="production-idleTime">Idle Time</label>
                         <input type="number" class="form-control" name="idleTime" id="production-idleTime"
                             :class="{'valid': !$v.production.idleTime.$invalid, 'invalid': $v.production.idleTime.$invalid }" v-model.number="$v.production.idleTime.$model" />
@@ -43,6 +48,16 @@
                         <label class="form-control-label" for="production-inWaitTime">In Wait Time</label>
                         <input type="number" class="form-control" name="inWaitTime" id="production-inWaitTime"
                             :class="{'valid': !$v.production.inWaitTime.$invalid, 'invalid': $v.production.inWaitTime.$invalid }" v-model.number="$v.production.inWaitTime.$model" />
+                    </div>
+                    <div class="form-group">
+                        <label class="form-control-label" for="production-outWaitTime">Out Wait Time</label>
+                        <input type="number" class="form-control" name="outWaitTime" id="production-outWaitTime"
+                            :class="{'valid': !$v.production.outWaitTime.$invalid, 'invalid': $v.production.outWaitTime.$invalid }" v-model.number="$v.production.outWaitTime.$model" />
+                    </div>
+                    <div class="form-group">
+                        <label class="form-control-label" for="production-transTime">Trans Time</label>
+                        <input type="number" class="form-control" name="transTime" id="production-transTime"
+                            :class="{'valid': !$v.production.transTime.$invalid, 'invalid': $v.production.transTime.$invalid }" v-model.number="$v.production.transTime.$model" />
                     </div>
                     <div class="form-group">
                         <label class="form-control-label" for="production-wrongStopTime">Wrong Stop Time</label>
@@ -68,6 +83,11 @@
                         <label class="form-control-label" for="production-panelInCount">Panel In Count</label>
                         <input type="number" class="form-control" name="panelInCount" id="production-panelInCount"
                             :class="{'valid': !$v.production.panelInCount.$invalid, 'invalid': $v.production.panelInCount.$invalid }" v-model.number="$v.production.panelInCount.$model" />
+                    </div>
+                    <div class="form-group">
+                        <label class="form-control-label" for="production-panelOutCount">Panel Out Count</label>
+                        <input type="number" class="form-control" name="panelOutCount" id="production-panelOutCount"
+                            :class="{'valid': !$v.production.panelOutCount.$invalid, 'invalid': $v.production.panelOutCount.$invalid }" v-model.number="$v.production.panelOutCount.$model" />
                     </div>
                     <div class="form-group">
                         <label class="form-control-label" for="production-panelCount">Panel Count</label>

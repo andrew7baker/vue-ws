@@ -21,7 +21,7 @@ describe('Service Tests', () => {
     beforeEach(() => {
       service = new ProductionService();
 
-      elemDefault = new Production(0, 'AAAAAAA', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+      elemDefault = new Production(0, 'AAAAAAA', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
     });
 
     describe('Service methods', () => {
@@ -56,13 +56,17 @@ describe('Service Tests', () => {
             placeTime: 1,
             waitTime: 1,
             runTime: 1,
+            stopTime: 1,
             idleTime: 1,
             inWaitTime: 1,
+            outWaitTime: 1,
+            transTime: 1,
             wrongStopTime: 1,
             errorStopTIme: 1,
             wrongStopCount: 1,
             errorStopCount: 1,
             panelInCount: 1,
+            panelOutCount: 1,
             panelCount: 1,
             pCBCount: 1,
             errorPcb: 1,
@@ -93,13 +97,17 @@ describe('Service Tests', () => {
             placeTime: 1,
             waitTime: 1,
             runTime: 1,
+            stopTime: 1,
             idleTime: 1,
             inWaitTime: 1,
+            outWaitTime: 1,
+            transTime: 1,
             wrongStopTime: 1,
             errorStopTIme: 1,
             wrongStopCount: 1,
             errorStopCount: 1,
             panelInCount: 1,
+            panelOutCount: 1,
             panelCount: 1,
             pCBCount: 1,
             errorPcb: 1,

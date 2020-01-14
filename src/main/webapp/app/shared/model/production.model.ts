@@ -5,13 +5,17 @@ export interface IProduction {
   placeTime?: number;
   waitTime?: number;
   runTime?: number;
+  stopTime?: number;
   idleTime?: number;
   inWaitTime?: number;
+  outWaitTime?: number;
+  transTime?: number;
   wrongStopTime?: number;
   errorStopTIme?: number;
   wrongStopCount?: number;
   errorStopCount?: number;
   panelInCount?: number;
+  panelOutCount?: number;
   panelCount?: number;
   pCBCount?: number;
   errorPcb?: number;
@@ -33,13 +37,17 @@ export class Production implements IProduction {
     public placeTime?: number,
     public waitTime?: number,
     public runTime?: number,
+    public stopTime?: number,
     public idleTime?: number,
     public inWaitTime?: number,
+    public outWaitTime?: number,
+    public transTime?: number,
     public wrongStopTime?: number,
     public errorStopTIme?: number,
     public wrongStopCount?: number,
     public errorStopCount?: number,
     public panelInCount?: number,
+    public panelOutCount?: number,
     public panelCount?: number,
     public pCBCount?: number,
     public errorPcb?: number,

@@ -22,11 +22,23 @@
             "fieldType": "Integer"
         },
         {
+            "fieldName": "stopTime",
+            "fieldType": "Integer"
+        },
+        {
             "fieldName": "idleTime",
             "fieldType": "Integer"
         },
         {
             "fieldName": "inWaitTime",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "outWaitTime",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "transTime",
             "fieldType": "Integer"
         },
         {
@@ -47,6 +59,10 @@
         },
         {
             "fieldName": "panelInCount",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "panelOutCount",
             "fieldType": "Integer"
         },
         {
@@ -95,7 +111,7 @@
         }
     ],
     "relationships": [],
-    "changelogDate": "20200114132646",
+    "changelogDate": "20200114134858",
     "entityTableName": "production",
     "dto": "no",
     "pagination": "pagination",

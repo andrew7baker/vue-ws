@@ -35,6 +35,12 @@
                         <span>{{production.runTime}}</span>
                     </dd>
                     <dt>
+                        <span>Stop Time</span>
+                    </dt>
+                    <dd>
+                        <span>{{production.stopTime}}</span>
+                    </dd>
+                    <dt>
                         <span>Idle Time</span>
                     </dt>
                     <dd>
@@ -45,6 +51,18 @@
                     </dt>
                     <dd>
                         <span>{{production.inWaitTime}}</span>
+                    </dd>
+                    <dt>
+                        <span>Out Wait Time</span>
+                    </dt>
+                    <dd>
+                        <span>{{production.outWaitTime}}</span>
+                    </dd>
+                    <dt>
+                        <span>Trans Time</span>
+                    </dt>
+                    <dd>
+                        <span>{{production.transTime}}</span>
                     </dd>
                     <dt>
                         <span>Wrong Stop Time</span>
@@ -75,6 +93,12 @@
                     </dt>
                     <dd>
                         <span>{{production.panelInCount}}</span>
+                    </dd>
+                    <dt>
+                        <span>Panel Out Count</span>
+                    </dt>
+                    <dd>
+                        <span>{{production.panelOutCount}}</span>
                     </dd>
                     <dt>
                         <span>Panel Count</span>

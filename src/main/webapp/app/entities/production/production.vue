@@ -30,13 +30,17 @@
                     <th v-on:click="changeOrder('placeTime')"><span>Place Time</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
                     <th v-on:click="changeOrder('waitTime')"><span>Wait Time</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
                     <th v-on:click="changeOrder('runTime')"><span>Run Time</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
+                    <th v-on:click="changeOrder('stopTime')"><span>Stop Time</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
                     <th v-on:click="changeOrder('idleTime')"><span>Idle Time</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
                     <th v-on:click="changeOrder('inWaitTime')"><span>In Wait Time</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
+                    <th v-on:click="changeOrder('outWaitTime')"><span>Out Wait Time</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
+                    <th v-on:click="changeOrder('transTime')"><span>Trans Time</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
                     <th v-on:click="changeOrder('wrongStopTime')"><span>Wrong Stop Time</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
                     <th v-on:click="changeOrder('errorStopTIme')"><span>Error Stop T Ime</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
                     <th v-on:click="changeOrder('wrongStopCount')"><span>Wrong Stop Count</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
                     <th v-on:click="changeOrder('errorStopCount')"><span>Error Stop Count</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
                     <th v-on:click="changeOrder('panelInCount')"><span>Panel In Count</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
+                    <th v-on:click="changeOrder('panelOutCount')"><span>Panel Out Count</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
                     <th v-on:click="changeOrder('panelCount')"><span>Panel Count</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
                     <th v-on:click="changeOrder('pCBCount')"><span>P CB Count</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
                     <th v-on:click="changeOrder('errorPcb')"><span>Error Pcb</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
@@ -62,13 +66,17 @@
                     <td>{{production.placeTime}}</td>
                     <td>{{production.waitTime}}</td>
                     <td>{{production.runTime}}</td>
+                    <td>{{production.stopTime}}</td>
                     <td>{{production.idleTime}}</td>
                     <td>{{production.inWaitTime}}</td>
+                    <td>{{production.outWaitTime}}</td>
+                    <td>{{production.transTime}}</td>
                     <td>{{production.wrongStopTime}}</td>
                     <td>{{production.errorStopTIme}}</td>
                     <td>{{production.wrongStopCount}}</td>
                     <td>{{production.errorStopCount}}</td>
                     <td>{{production.panelInCount}}</td>
+                    <td>{{production.panelOutCount}}</td>
                     <td>{{production.panelCount}}</td>
                     <td>{{production.pCBCount}}</td>
                     <td>{{production.errorPcb}}</td>
