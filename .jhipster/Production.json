@@ -1,0 +1,108 @@
+{
+    "name": "Production",
+    "fields": [
+        {
+            "fieldName": "version",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "powerTime",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "placeTime",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "waitTime",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "runTime",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "idleTime",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "inWaitTime",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "wrongStopTime",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "errorStopTIme",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "wrongStopCount",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "errorStopCount",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "panelInCount",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "panelCount",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "pCBCount",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "errorPcb",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "skipPCB",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "operationRate",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "placementRate",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "meanTime",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "realTime",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "transferTime",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "placeCount",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "theEfficiency",
+            "fieldType": "Long"
+        }
+    ],
+    "relationships": [],
+    "changelogDate": "20200114132646",
+    "entityTableName": "production",
+    "dto": "no",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}
