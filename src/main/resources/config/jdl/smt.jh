@@ -1,0 +1,35 @@
+// 生产数据
+entity Production {
+    Version String,
+	PowerTime Integer,
+    PlaceTime Integer,
+    WaitTime Integer,
+    RunTime Integer,
+    IdleTime Integer,
+    InWaitTime Integer,
+    WrongStopTime Integer,
+    ErrorStopTIme Integer,
+    WrongStopCount Integer,
+    ErrorStopCount Integer,
+    PanelInCount Integer,
+    PanelCount Integer,
+    PCBCount Integer,
+    ErrorPcb Integer,
+    SkipPCB Integer,
+    OperationRate Long,
+    PlacementRate Long,
+    MeanTime Long,
+    RealTime Long,
+    TransferTime Long,
+    PlaceCount Integer,
+    TheEfficiency Long
+}
+
+
+
+paginate Production with pagination
+
+// Set service options to all except few
+service all with serviceImpl
+// Set an angular suffix
+//angularSuffix * with mySuffix
