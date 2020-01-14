@@ -2,6 +2,7 @@ package com.mycompany.myapp.web.rest;
 
 import com.alibaba.fastjson.JSON;
 import com.mycompany.myapp.domain.BmtPayRecord;
+import com.mycompany.myapp.domain.Production;
 import org.apache.commons.net.ftp.*;
 import org.jdbi.v3.core.Jdbi;
 import org.slf4j.Logger;
@@ -182,16 +183,13 @@ public class BmtChangCiReportResource {
     public Map<String, Object> getMap() {
         Map<String, Object> map = new HashMap<>(3);
         String[] arr = {"", "Kia", "Nissan", "Toyota", "Honda", "Mazda", "Ford"};
-
         Jdbi jdbi = Jdbi.create("jdbc:postgresql://tx:5432/smt?", "smt", "smt");
         log.info("jdbi"+jdbi);
-
-//        List<BmtPayRecord> list =jdbi.withHandle(handle ->
-//            handle.createQuery("select * from bmt_pay_record ")
-//                .mapToBean(BmtPayRecord.class)
+//        List<Production> list =jdbi.withHandle(handle ->
+//            handle.createQuery("select * from production ")
+//                .mapToBean(Production.class)
 //                .list());
 //        log.info("list"+list);
-
         String[][] arrStr=new String[3][5];
         arrStr[0][0]="付款时间";
         arrStr[0][1]="付款人ID";
@@ -209,7 +207,32 @@ public class BmtChangCiReportResource {
         arrStr[2][3]="5";
         arrStr[2][4]="5";
         map.put("data", arrStr);
+        return map;
+    }
 
+    @GetMapping("/getSmt")
+    public Map<String, Object> getSmtMap() {
+        Map<String, Object> map = new HashMap<>(3);
+        String[] arr = {"", "Kia", "Nissan", "Toyota", "Honda", "Mazda", "Ford"};
+        Jdbi jdbi = Jdbi.create("jdbc:postgresql://tx:5432/smt?", "smt", "smt");
+        log.info("jdbi"+jdbi);
+        List<Production> list =jdbi.withHandle(handle ->
+            handle.createQuery("select * from production ")
+                .mapToBean(Production.class)
+                .list());
+        log.info("list"+list);
+        Production p =(Production)list.get(0);
+
+        String s = p.getPowerTime()+"";
+        log.info("p.getPowerTime()="+p.getPowerTime()+";s="+s);
+        String[][] arrStr=new String[3][5];
+        arrStr[0][0]="付款时间";
+        arrStr[0][1]="付款人ID";
+        arrStr[1][0]="Power Time";
+        arrStr[1][1]=""+p.getPowerTime();
+        arrStr[2][0]="Place Time";
+        arrStr[2][1]="2345";
+        map.put("data", arrStr);
         return map;
     }
 
