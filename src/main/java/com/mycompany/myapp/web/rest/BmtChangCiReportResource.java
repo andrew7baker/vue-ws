@@ -94,11 +94,6 @@ public class BmtChangCiReportResource {
         FTPClient ftp = new FTPClient();
         PrintWriter writer = new PrintWriter(System.out);
         try {
-//            ftp = new FTPHTTPClient(FTP_HOST , FTP_PORT, FTP_USER , FTP_PASS);
-            // Redirect FTP commands to stdout if flag set.
-//            if (FTP_PROTOCOL_DEBUGGING) {
-//                ftp.addProtocolCommandListener(new PrintCommandListener(writer));
-//            }
 
             // Connect/login.
             System.out.println(MessageFormat.format("Connecting to ftp host: {0} on port: {1}",
