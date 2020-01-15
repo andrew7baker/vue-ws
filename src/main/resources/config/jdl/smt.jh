@@ -20,13 +20,13 @@ entity Production {
     PCBCount Integer,
     ErrorPcb Integer,
     SkipPCB Integer,
-    OperationRate Long,
-    PlacementRate Long,
-    MeanTime Long,
-    RealTime Long,
-    TransferTime Long,
+    OperationRate Float,
+    PlacementRate Float,
+    MeanTime Float,
+    RealTime Float,
+    TransferTime Float,
     PlaceCount Integer,
-    TheEfficiency Long
+    TheEfficiency Float
 }
 
 
