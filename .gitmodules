@@ -1,3 +1,6 @@
 [submodule "src/main/webapp/smt2"]
 	path = src/main/webapp/smt2
 	url = https://github.com/andrew7baker/smt.git
+[submodule "smt"]
+	path = smt
+	url = https://github.com/andrew7baker/smt.git
