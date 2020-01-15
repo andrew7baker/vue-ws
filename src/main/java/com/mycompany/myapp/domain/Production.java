@@ -82,25 +82,25 @@ public class Production implements Serializable {
     private Integer skipPCB;
 
     @Column(name = "operation_rate")
-    private Long operationRate;
+    private Float operationRate;
 
     @Column(name = "placement_rate")
-    private Long placementRate;
+    private Float placementRate;
 
     @Column(name = "mean_time")
-    private Long meanTime;
+    private Float meanTime;
 
     @Column(name = "real_time")
-    private Long realTime;
+    private Float realTime;
 
     @Column(name = "transfer_time")
-    private Long transferTime;
+    private Float transferTime;
 
     @Column(name = "place_count")
     private Integer placeCount;
 
     @Column(name = "the_efficiency")
-    private Long theEfficiency;
+    private Float theEfficiency;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -371,68 +371,68 @@ public class Production implements Serializable {
         this.skipPCB = skipPCB;
     }
 
-    public Long getOperationRate() {
+    public Float getOperationRate() {
         return operationRate;
     }
 
-    public Production operationRate(Long operationRate) {
+    public Production operationRate(Float operationRate) {
         this.operationRate = operationRate;
         return this;
     }
 
-    public void setOperationRate(Long operationRate) {
+    public void setOperationRate(Float operationRate) {
         this.operationRate = operationRate;
     }
 
-    public Long getPlacementRate() {
+    public Float getPlacementRate() {
         return placementRate;
     }
 
-    public Production placementRate(Long placementRate) {
+    public Production placementRate(Float placementRate) {
         this.placementRate = placementRate;
         return this;
     }
 
-    public void setPlacementRate(Long placementRate) {
+    public void setPlacementRate(Float placementRate) {
         this.placementRate = placementRate;
     }
 
-    public Long getMeanTime() {
+    public Float getMeanTime() {
         return meanTime;
     }
 
-    public Production meanTime(Long meanTime) {
+    public Production meanTime(Float meanTime) {
         this.meanTime = meanTime;
         return this;
     }
 
-    public void setMeanTime(Long meanTime) {
+    public void setMeanTime(Float meanTime) {
         this.meanTime = meanTime;
     }
 
-    public Long getRealTime() {
+    public Float getRealTime() {
         return realTime;
     }
 
-    public Production realTime(Long realTime) {
+    public Production realTime(Float realTime) {
         this.realTime = realTime;
         return this;
     }
 
-    public void setRealTime(Long realTime) {
+    public void setRealTime(Float realTime) {
         this.realTime = realTime;
     }
 
-    public Long getTransferTime() {
+    public Float getTransferTime() {
         return transferTime;
     }
 
-    public Production transferTime(Long transferTime) {
+    public Production transferTime(Float transferTime) {
         this.transferTime = transferTime;
         return this;
     }
 
-    public void setTransferTime(Long transferTime) {
+    public void setTransferTime(Float transferTime) {
         this.transferTime = transferTime;
     }
 
@@ -449,16 +449,16 @@ public class Production implements Serializable {
         this.placeCount = placeCount;
     }
 
-    public Long getTheEfficiency() {
+    public Float getTheEfficiency() {
         return theEfficiency;
     }
 
-    public Production theEfficiency(Long theEfficiency) {
+    public Production theEfficiency(Float theEfficiency) {
         this.theEfficiency = theEfficiency;
         return this;
     }
 
-    public void setTheEfficiency(Long theEfficiency) {
+    public void setTheEfficiency(Float theEfficiency) {
         this.theEfficiency = theEfficiency;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove

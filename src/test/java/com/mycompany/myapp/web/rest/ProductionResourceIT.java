@@ -94,26 +94,26 @@ public class ProductionResourceIT {
     private static final Integer DEFAULT_SKIP_PCB = 1;
     private static final Integer UPDATED_SKIP_PCB = 2;
 
-    private static final Long DEFAULT_OPERATION_RATE = 1L;
-    private static final Long UPDATED_OPERATION_RATE = 2L;
+    private static final Float DEFAULT_OPERATION_RATE = 1F;
+    private static final Float UPDATED_OPERATION_RATE = 2F;
 
-    private static final Long DEFAULT_PLACEMENT_RATE = 1L;
-    private static final Long UPDATED_PLACEMENT_RATE = 2L;
+    private static final Float DEFAULT_PLACEMENT_RATE = 1F;
+    private static final Float UPDATED_PLACEMENT_RATE = 2F;
 
-    private static final Long DEFAULT_MEAN_TIME = 1L;
-    private static final Long UPDATED_MEAN_TIME = 2L;
+    private static final Float DEFAULT_MEAN_TIME = 1F;
+    private static final Float UPDATED_MEAN_TIME = 2F;
 
-    private static final Long DEFAULT_REAL_TIME = 1L;
-    private static final Long UPDATED_REAL_TIME = 2L;
+    private static final Float DEFAULT_REAL_TIME = 1F;
+    private static final Float UPDATED_REAL_TIME = 2F;
 
-    private static final Long DEFAULT_TRANSFER_TIME = 1L;
-    private static final Long UPDATED_TRANSFER_TIME = 2L;
+    private static final Float DEFAULT_TRANSFER_TIME = 1F;
+    private static final Float UPDATED_TRANSFER_TIME = 2F;
 
     private static final Integer DEFAULT_PLACE_COUNT = 1;
     private static final Integer UPDATED_PLACE_COUNT = 2;
 
-    private static final Long DEFAULT_THE_EFFICIENCY = 1L;
-    private static final Long UPDATED_THE_EFFICIENCY = 2L;
+    private static final Float DEFAULT_THE_EFFICIENCY = 1F;
+    private static final Float UPDATED_THE_EFFICIENCY = 2F;
 
     @Autowired
     private ProductionRepository productionRepository;
@@ -327,13 +327,13 @@ public class ProductionResourceIT {
             .andExpect(jsonPath("$.[*].pCBCount").value(hasItem(DEFAULT_P_CB_COUNT)))
             .andExpect(jsonPath("$.[*].errorPcb").value(hasItem(DEFAULT_ERROR_PCB)))
             .andExpect(jsonPath("$.[*].skipPCB").value(hasItem(DEFAULT_SKIP_PCB)))
-            .andExpect(jsonPath("$.[*].operationRate").value(hasItem(DEFAULT_OPERATION_RATE.intValue())))
-            .andExpect(jsonPath("$.[*].placementRate").value(hasItem(DEFAULT_PLACEMENT_RATE.intValue())))
-            .andExpect(jsonPath("$.[*].meanTime").value(hasItem(DEFAULT_MEAN_TIME.intValue())))
-            .andExpect(jsonPath("$.[*].realTime").value(hasItem(DEFAULT_REAL_TIME.intValue())))
-            .andExpect(jsonPath("$.[*].transferTime").value(hasItem(DEFAULT_TRANSFER_TIME.intValue())))
+            .andExpect(jsonPath("$.[*].operationRate").value(hasItem(DEFAULT_OPERATION_RATE.doubleValue())))
+            .andExpect(jsonPath("$.[*].placementRate").value(hasItem(DEFAULT_PLACEMENT_RATE.doubleValue())))
+            .andExpect(jsonPath("$.[*].meanTime").value(hasItem(DEFAULT_MEAN_TIME.doubleValue())))
+            .andExpect(jsonPath("$.[*].realTime").value(hasItem(DEFAULT_REAL_TIME.doubleValue())))
+            .andExpect(jsonPath("$.[*].transferTime").value(hasItem(DEFAULT_TRANSFER_TIME.doubleValue())))
             .andExpect(jsonPath("$.[*].placeCount").value(hasItem(DEFAULT_PLACE_COUNT)))
-            .andExpect(jsonPath("$.[*].theEfficiency").value(hasItem(DEFAULT_THE_EFFICIENCY.intValue())));
+            .andExpect(jsonPath("$.[*].theEfficiency").value(hasItem(DEFAULT_THE_EFFICIENCY.doubleValue())));
     }
     
     @Test
@@ -367,13 +367,13 @@ public class ProductionResourceIT {
             .andExpect(jsonPath("$.pCBCount").value(DEFAULT_P_CB_COUNT))
             .andExpect(jsonPath("$.errorPcb").value(DEFAULT_ERROR_PCB))
             .andExpect(jsonPath("$.skipPCB").value(DEFAULT_SKIP_PCB))
-            .andExpect(jsonPath("$.operationRate").value(DEFAULT_OPERATION_RATE.intValue()))
-            .andExpect(jsonPath("$.placementRate").value(DEFAULT_PLACEMENT_RATE.intValue()))
-            .andExpect(jsonPath("$.meanTime").value(DEFAULT_MEAN_TIME.intValue()))
-            .andExpect(jsonPath("$.realTime").value(DEFAULT_REAL_TIME.intValue()))
-            .andExpect(jsonPath("$.transferTime").value(DEFAULT_TRANSFER_TIME.intValue()))
+            .andExpect(jsonPath("$.operationRate").value(DEFAULT_OPERATION_RATE.doubleValue()))
+            .andExpect(jsonPath("$.placementRate").value(DEFAULT_PLACEMENT_RATE.doubleValue()))
+            .andExpect(jsonPath("$.meanTime").value(DEFAULT_MEAN_TIME.doubleValue()))
+            .andExpect(jsonPath("$.realTime").value(DEFAULT_REAL_TIME.doubleValue()))
+            .andExpect(jsonPath("$.transferTime").value(DEFAULT_TRANSFER_TIME.doubleValue()))
             .andExpect(jsonPath("$.placeCount").value(DEFAULT_PLACE_COUNT))
-            .andExpect(jsonPath("$.theEfficiency").value(DEFAULT_THE_EFFICIENCY.intValue()));
+            .andExpect(jsonPath("$.theEfficiency").value(DEFAULT_THE_EFFICIENCY.doubleValue()));
     }
 
     @Test

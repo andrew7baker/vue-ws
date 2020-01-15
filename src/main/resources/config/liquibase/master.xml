@@ -17,7 +17,7 @@
     <include file="config/liquibase/changelog/20200105063842_added_entity_BmtChangCi.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20200105063843_added_entity_BmtPayRecord.xml" relativeToChangelogFile="false"/>
 
-    <include file="config/liquibase/changelog/20200114134858_added_entity_Production.xml" relativeToChangelogFile="false"/>
+    <!--<include file="config/liquibase/changelog/20200114134858_added_entity_Production.xml" relativeToChangelogFile="false"/>-->
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <include file="config/liquibase/changelog/20200105063843_added_entity_constraints_BmtPayRecord.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->

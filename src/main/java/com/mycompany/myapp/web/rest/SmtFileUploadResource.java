@@ -148,11 +148,11 @@ public class SmtFileUploadResource {
                         if(j==17) p.setpCBCount(new Integer(value));
                         if(j==18) p.setErrorPcb(new Integer(value));
                         if(j==19) p.setSkipPCB(new Integer(value));
-                        if(j==20) p.setOperationRate(Long.valueOf("92.05".trim()));
-                        if(j==21) p.setPlacementRate(Long.valueOf(value.trim()));
-                        if(j==22) p.meanTime(Long.valueOf(value.trim()));
-                        if(j==23) p.setRealTime(Long.valueOf(value.trim()));
-                        if(j==24) p.setTransferTime(Long.valueOf(value.trim()));
+                        if(j==20) p.setOperationRate(Float.valueOf(value.trim()));
+                        if(j==21) p.setPlacementRate(Float.valueOf(value.trim()));
+                        if(j==22) p.meanTime(Float.valueOf(value.trim()));
+                        if(j==23) p.setRealTime(Float.valueOf(value.trim()));
+                        if(j==24) p.setTransferTime(Float.valueOf(value.trim()));
                         if(j==25) p.placeCount(new Integer(value));
                         System.out.println("j="+j+":line="+line+";value="+value);
                         j++;

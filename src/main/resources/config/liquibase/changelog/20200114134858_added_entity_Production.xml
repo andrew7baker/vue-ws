@@ -75,25 +75,25 @@
             <column name="skip_pcb" type="integer">
                 <constraints nullable="true" />
             </column>
-            <column name="operation_rate" type="bigint">
+            <column name="operation_rate" type="${floatType}">
                 <constraints nullable="true" />
             </column>
-            <column name="placement_rate" type="bigint">
+            <column name="placement_rate" type="${floatType}">
                 <constraints nullable="true" />
             </column>
-            <column name="mean_time" type="bigint">
+            <column name="mean_time" type="${floatType}">
                 <constraints nullable="true" />
             </column>
-            <column name="real_time" type="bigint">
+            <column name="real_time" type="${floatType}">
                 <constraints nullable="true" />
             </column>
-            <column name="transfer_time" type="bigint">
+            <column name="transfer_time" type="${floatType}">
                 <constraints nullable="true" />
             </column>
             <column name="place_count" type="integer">
                 <constraints nullable="true" />
             </column>
-            <column name="the_efficiency" type="bigint">
+            <column name="the_efficiency" type="${floatType}">
                 <constraints nullable="true" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->

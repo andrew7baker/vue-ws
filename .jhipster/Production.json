@@ -83,23 +83,23 @@
         },
         {
             "fieldName": "operationRate",
-            "fieldType": "Long"
+            "fieldType": "Float"
         },
         {
             "fieldName": "placementRate",
-            "fieldType": "Long"
+            "fieldType": "Float"
         },
         {
             "fieldName": "meanTime",
-            "fieldType": "Long"
+            "fieldType": "Float"
         },
         {
             "fieldName": "realTime",
-            "fieldType": "Long"
+            "fieldType": "Float"
         },
         {
             "fieldName": "transferTime",
-            "fieldType": "Long"
+            "fieldType": "Float"
         },
         {
             "fieldName": "placeCount",
@@ -107,7 +107,7 @@
         },
         {
             "fieldName": "theEfficiency",
-            "fieldType": "Long"
+            "fieldType": "Float"
         }
     ],
     "relationships": [],
