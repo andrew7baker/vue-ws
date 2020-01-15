@@ -208,7 +208,7 @@ public class BmtChangCiReportResource {
     @GetMapping("/getSmt")
     public Map<String, Object> getSmtMap() {
         Map<String, Object> map = new HashMap<>(3);
-        String[] arr = {"", "Kia", "Nissan", "Toyota", "Honda", "Mazda", "Ford"};
+
         Jdbi jdbi = Jdbi.create("jdbc:postgresql://tx:5432/smt?", "smt", "smt");
         log.info("jdbi"+jdbi);
         List<Production> list =jdbi.withHandle(handle ->
