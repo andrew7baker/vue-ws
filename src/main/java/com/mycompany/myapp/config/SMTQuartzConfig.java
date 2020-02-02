@@ -15,7 +15,7 @@ public class SMTQuartzConfig {
     @Bean
     public Trigger testQuartzTrigger(){
         SimpleScheduleBuilder scheduleBuilder = SimpleScheduleBuilder.simpleSchedule()
-            .withIntervalInSeconds(10)  //设置时间周期单位秒
+            .withIntervalInSeconds(60)  //设置时间周期单位秒
             .repeatForever();
         return TriggerBuilder.newTrigger().forJob(teatQuartzDetail())
             .withIdentity("testQuartz")
