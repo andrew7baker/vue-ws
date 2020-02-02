@@ -7,10 +7,8 @@ import org.apache.commons.net.ftp.*;
 import org.jdbi.v3.core.Jdbi;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.*;
 import java.text.MessageFormat;
@@ -279,4 +277,25 @@ public class BmtChangCiReportResource {
         return map;
     }
 
+    /**
+     * 获取列表
+     * @return
+     */
+    @GetMapping("/getSmtList")
+    public ResponseEntity getSmtList() {
+        Map<String, Object> map = new HashMap<>(3);
+        Jdbi jdbi = Jdbi.create("jdbc:postgresql://tx:5432/smt?", "smt", "smt");
+        log.info("jdbi"+jdbi);
+        List<Production> list =jdbi.withHandle(handle ->
+            handle.createQuery("select *  from production ")
+                .mapToBean(Production.class)
+                .list());
+        log.info("list"+list);
+        Production p =(Production)list.get(0);
+        String s = p.getPowerTime()+"";
+        log.info("p.getPowerTime()="+p.getPowerTime()+";s="+s+";list");
+        Map a = new HashMap<>();
+        a.put("data",list );
+        return ResponseEntity.ok(a);
+    }
 }
