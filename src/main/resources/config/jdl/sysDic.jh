@@ -1,5 +1,5 @@
 // 系统部门表
-entity SysDep {
+entity SysDept {
     parentId Long,
     parentIds String,
     simpleName String,
@@ -7,7 +7,7 @@ entity SysDep {
     description String,
     version String,
     status String,
-    sort Int,
+    sort Integer,
     createTime Instant,
     createUser Long,
     updateTime Instant,
@@ -22,7 +22,7 @@ entity SysDic {
     parentId Long,
     parentIds String,
     status String,
-    sort Int,
+    sort Integer,
     description String,
     createTime Instant,
     createUser Long,
@@ -36,7 +36,7 @@ entity SysDicType {
     name String,
     systemFlag String,
     status String,
-    sort Int,
+    sort Integer,
     description String,
     createTime Instant,
     createUser Long,
