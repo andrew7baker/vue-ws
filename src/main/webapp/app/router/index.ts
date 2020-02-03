@@ -49,6 +49,18 @@ const SysConfig = () => import('../entities/sys-config/sys-config.vue');
 const SysConfigUpdate = () => import('../entities/sys-config/sys-config-update.vue');
 // prettier-ignore
 const SysConfigDetails = () => import('../entities/sys-config/sys-config-details.vue');
+// prettier-ignore
+const SysDict = () => import('../entities/sys-dict/sys-dict.vue');
+// prettier-ignore
+const SysDictUpdate = () => import('../entities/sys-dict/sys-dict-update.vue');
+// prettier-ignore
+const SysDictDetails = () => import('../entities/sys-dict/sys-dict-details.vue');
+// prettier-ignore
+const SysDictType = () => import('../entities/sys-dict-type/sys-dict-type.vue');
+// prettier-ignore
+const SysDictTypeUpdate = () => import('../entities/sys-dict-type/sys-dict-type-update.vue');
+// prettier-ignore
+const SysDictTypeDetails = () => import('../entities/sys-dict-type/sys-dict-type-details.vue');
 // jhipster-needle-add-entity-to-router-import - JHipster will import entities to the router here
 
 Vue.use(Router);
@@ -271,6 +283,56 @@ export default new Router({
       path: '/sys-config/:sysConfigId/view',
       name: 'SysConfigView',
       component: SysConfigDetails,
+      meta: { authorities: ['ROLE_USER'] }
+    }
+    ,
+    {
+      path: '/sys-dict',
+      name: 'SysDict',
+      component: SysDict,
+      meta: { authorities: ['ROLE_USER'] }
+    },
+    {
+      path: '/sys-dict/new',
+      name: 'SysDictCreate',
+      component: SysDictUpdate,
+      meta: { authorities: ['ROLE_USER'] }
+    },
+    {
+      path: '/sys-dict/:sysDictId/edit',
+      name: 'SysDictEdit',
+      component: SysDictUpdate,
+      meta: { authorities: ['ROLE_USER'] }
+    },
+    {
+      path: '/sys-dict/:sysDictId/view',
+      name: 'SysDictView',
+      component: SysDictDetails,
+      meta: { authorities: ['ROLE_USER'] }
+    }
+    ,
+    {
+      path: '/sys-dict-type',
+      name: 'SysDictType',
+      component: SysDictType,
+      meta: { authorities: ['ROLE_USER'] }
+    },
+    {
+      path: '/sys-dict-type/new',
+      name: 'SysDictTypeCreate',
+      component: SysDictTypeUpdate,
+      meta: { authorities: ['ROLE_USER'] }
+    },
+    {
+      path: '/sys-dict-type/:sysDictTypeId/edit',
+      name: 'SysDictTypeEdit',
+      component: SysDictTypeUpdate,
+      meta: { authorities: ['ROLE_USER'] }
+    },
+    {
+      path: '/sys-dict-type/:sysDictTypeId/view',
+      name: 'SysDictTypeView',
+      component: SysDictTypeDetails,
       meta: { authorities: ['ROLE_USER'] }
     }
     // jhipster-needle-add-entity-to-router - JHipster will add entities to the router here

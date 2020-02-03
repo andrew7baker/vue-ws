@@ -41,6 +41,14 @@
                         <font-awesome-icon icon="asterisk" />
                         <span >SysConfig</span>
                     </b-dropdown-item>
+                    <b-dropdown-item to="/sys-dict">
+                        <font-awesome-icon icon="asterisk" />
+                        <span >SysDict</span>
+                    </b-dropdown-item>
+                    <b-dropdown-item to="/sys-dict-type">
+                        <font-awesome-icon icon="asterisk" />
+                        <span >SysDictType</span>
+                    </b-dropdown-item>
                     <!-- jhipster-needle-add-entity-to-menu - JHipster will add entities to the menu here -->
                 </b-nav-item-dropdown>
                 <b-nav-item-dropdown
