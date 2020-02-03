@@ -31,6 +31,7 @@ import ProductionService from '@/entities/production/production.service';
 import SysConfigService from '@/entities/sys-config/sys-config.service';
 import SysDictService from '@/entities/sys-dict/sys-dict.service';
 import SysDictTypeService from '@/entities/sys-dict-type/sys-dict-type.service';
+import SysDeptService from '@/entities/sys-dept/sys-dept.service';
 // jhipster-needle-add-entity-service-to-main-import - JHipster will import entities services here
 
 Vue.config.productionTip = false;
@@ -93,6 +94,7 @@ new Vue({
     sysConfigService: () => new SysConfigService(),
     sysDictService: () => new SysDictService(),
     sysDictTypeService: () => new SysDictTypeService(),
+    sysDeptService: () => new SysDeptService(),
     // jhipster-needle-add-entity-service-to-main - JHipster will import entities services here
     accountService: () => accountService
   },

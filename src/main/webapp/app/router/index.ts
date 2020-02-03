@@ -61,6 +61,12 @@ const SysDictType = () => import('../entities/sys-dict-type/sys-dict-type.vue');
 const SysDictTypeUpdate = () => import('../entities/sys-dict-type/sys-dict-type-update.vue');
 // prettier-ignore
 const SysDictTypeDetails = () => import('../entities/sys-dict-type/sys-dict-type-details.vue');
+// prettier-ignore
+const SysDept = () => import('../entities/sys-dept/sys-dept.vue');
+// prettier-ignore
+const SysDeptUpdate = () => import('../entities/sys-dept/sys-dept-update.vue');
+// prettier-ignore
+const SysDeptDetails = () => import('../entities/sys-dept/sys-dept-details.vue');
 // jhipster-needle-add-entity-to-router-import - JHipster will import entities to the router here
 
 Vue.use(Router);
@@ -333,6 +339,31 @@ export default new Router({
       path: '/sys-dict-type/:sysDictTypeId/view',
       name: 'SysDictTypeView',
       component: SysDictTypeDetails,
+      meta: { authorities: ['ROLE_USER'] }
+    }
+    ,
+    {
+      path: '/sys-dept',
+      name: 'SysDept',
+      component: SysDept,
+      meta: { authorities: ['ROLE_USER'] }
+    },
+    {
+      path: '/sys-dept/new',
+      name: 'SysDeptCreate',
+      component: SysDeptUpdate,
+      meta: { authorities: ['ROLE_USER'] }
+    },
+    {
+      path: '/sys-dept/:sysDeptId/edit',
+      name: 'SysDeptEdit',
+      component: SysDeptUpdate,
+      meta: { authorities: ['ROLE_USER'] }
+    },
+    {
+      path: '/sys-dept/:sysDeptId/view',
+      name: 'SysDeptView',
+      component: SysDeptDetails,
       meta: { authorities: ['ROLE_USER'] }
     }
     // jhipster-needle-add-entity-to-router - JHipster will add entities to the router here

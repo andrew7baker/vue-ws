@@ -51,6 +51,12 @@ INSERT INTO "sys_config" VALUES (1202256698843500545, 'FTP地址', 'FTP_ADD', 'N
 INSERT INTO "sys_config" VALUES (1202257741685886978, 'FTP目录', 'FTP_DIR', 'N', NULL, '2-yimi', '', '2019-12-05 00:05:57', 1, NULL, NULL);
 COMMIT;
 
+INSERT INTO "sys_dept" VALUES (24, 0, '[0],', '总公司', '总公司', '', NULL, 1, NULL, NULL, NULL, NULL);
+INSERT INTO "sys_dept" VALUES (25, 24, '[0],[24],', '开发部', '开发部', '', NULL, 2, NULL, NULL, NULL, NULL);
+INSERT INTO "sys_dept" VALUES (26, 24, '[0],[24],', '运营部', '运营部', '', NULL, 3, NULL, NULL, NULL, NULL);
+INSERT INTO "sys_dept" VALUES (27, 24, '[0],[24],', '战略部', '战略部', '', NULL, 4, NULL, NULL, NULL, NULL);
+
+
 BEGIN;
 INSERT INTO "public"."sys_dict" VALUES (1106120532442595330, 1106120208097067009, 'M', '男', 0, '[0]', 'ENABLE', NULL, '', '2019-03-14 17:11:00', NULL, '2019-06-25 09:04:42', NULL);
 INSERT INTO "public"."sys_dict" VALUES (1106120574163337218, 1106120208097067009, 'F', '女', 0, '[0]', 'ENABLE', NULL, '', '2019-03-14 17:11:10', NULL, '2019-06-25 09:04:42', NULL);

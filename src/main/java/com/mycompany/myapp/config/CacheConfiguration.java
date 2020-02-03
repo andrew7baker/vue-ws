@@ -49,6 +49,7 @@ public class CacheConfiguration {
             createCache(cm, com.mycompany.myapp.domain.SysConfig.class.getName());
             createCache(cm, com.mycompany.myapp.domain.SysDict.class.getName());
             createCache(cm, com.mycompany.myapp.domain.SysDictType.class.getName());
+            createCache(cm, com.mycompany.myapp.domain.SysDept.class.getName());
             // jhipster-needle-ehcache-add-entry
         };
     }
