@@ -1,0 +1,52 @@
+// 系统部门表
+entity SysDep {
+    parentId Long,
+    parentIds String,
+    simpleName String,
+    fullName String,
+    description String,
+    version String,
+    status String,
+    sort Int,
+    createTime Instant,
+    createUser Long,
+    updateTime Instant,
+    updateUser Long
+}
+
+// 系统字典表
+entity SysDic {
+	dicTypeId Long,
+    code String,
+    name String,
+    parentId Long,
+    parentIds String,
+    status String,
+    sort Int,
+    description String,
+    createTime Instant,
+    createUser Long,
+    updateTime Instant,
+    updateUser Long
+}
+
+// 系统字典类型表
+entity SysDicType {
+    code String,
+    name String,
+    systemFlag String,
+    status String,
+    sort Int,
+    description String,
+    createTime Instant,
+    createUser Long,
+    updateTime Instant,
+    updateUser Long
+}
+
+paginate * with pagination
+
+// Set service options to all except few
+service all with serviceImpl
+// Set an angular suffix
+//angularSuffix * with mySuffix
