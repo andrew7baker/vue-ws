@@ -15,7 +15,7 @@ entity SysDept {
 }
 
 // 系统字典表
-entity SysDic {
+entity SysDict {
 	dicTypeId Long,
     code String,
     name String,
@@ -31,7 +31,7 @@ entity SysDic {
 }
 
 // 系统字典类型表
-entity SysDicType {
+entity SysDictType {
     code String,
     name String,
     systemFlag String,
