@@ -1,0 +1,16 @@
+// 生产数据
+entity SysConfig {
+	name String,
+    code String,
+    dictFlag String,
+    dictTypeId Integer
+}
+
+
+
+paginate SysConfig with SysConfig
+
+// Set service options to all except few
+service all with serviceImpl
+// Set an angular suffix
+//angularSuffix * with mySuffix
