@@ -46,6 +46,7 @@ public class CacheConfiguration {
             createCache(cm, com.mycompany.myapp.domain.BmtChangCi.class.getName() + ".bmtPayRecords");
             createCache(cm, com.mycompany.myapp.domain.BmtPayRecord.class.getName());
             createCache(cm, com.mycompany.myapp.domain.Production.class.getName());
+            createCache(cm, com.mycompany.myapp.domain.SysConfig.class.getName());
             // jhipster-needle-ehcache-add-entry
         };
     }

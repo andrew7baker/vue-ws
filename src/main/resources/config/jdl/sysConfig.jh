@@ -1,14 +1,19 @@
-// 生产数据
+// 系统配置表
 entity SysConfig {
 	name String,
     code String,
     dictFlag String,
-    dictTypeId Integer
+    dictTypeId Long,
+    value String,
+    remark String,
+    remark String,
+    createTime Instant,
+    createUser Long,
+    updateTime Instant,
+    updateUser Long
 }
 
-
-
-paginate SysConfig with SysConfig
+paginate SysConfig with pagination
 
 // Set service options to all except few
 service all with serviceImpl

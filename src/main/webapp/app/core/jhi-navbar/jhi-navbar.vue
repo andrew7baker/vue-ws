@@ -37,6 +37,10 @@
                         <font-awesome-icon icon="asterisk" />
                         <span >Production</span>
                     </b-dropdown-item>
+                    <b-dropdown-item to="/sys-config">
+                        <font-awesome-icon icon="asterisk" />
+                        <span >SysConfig</span>
+                    </b-dropdown-item>
                     <!-- jhipster-needle-add-entity-to-menu - JHipster will add entities to the menu here -->
                 </b-nav-item-dropdown>
                 <b-nav-item-dropdown

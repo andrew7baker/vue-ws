@@ -28,6 +28,7 @@ import TrackerService from './admin/tracker/tracker.service';
 import BmtChangCiService from '@/entities/bmt-chang-ci/bmt-chang-ci.service';
 import BmtPayRecordService from '@/entities/bmt-pay-record/bmt-pay-record.service';
 import ProductionService from '@/entities/production/production.service';
+import SysConfigService from '@/entities/sys-config/sys-config.service';
 // jhipster-needle-add-entity-service-to-main-import - JHipster will import entities services here
 
 Vue.config.productionTip = false;
@@ -87,6 +88,7 @@ new Vue({
     bmtChangCiService: () => new BmtChangCiService(),
     bmtPayRecordService: () => new BmtPayRecordService(),
     productionService: () => new ProductionService(),
+    sysConfigService: () => new SysConfigService(),
     // jhipster-needle-add-entity-service-to-main - JHipster will import entities services here
     accountService: () => accountService
   },

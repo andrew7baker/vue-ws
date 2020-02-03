@@ -43,6 +43,12 @@ const Production = () => import('../entities/production/production.vue');
 const ProductionUpdate = () => import('../entities/production/production-update.vue');
 // prettier-ignore
 const ProductionDetails = () => import('../entities/production/production-details.vue');
+// prettier-ignore
+const SysConfig = () => import('../entities/sys-config/sys-config.vue');
+// prettier-ignore
+const SysConfigUpdate = () => import('../entities/sys-config/sys-config-update.vue');
+// prettier-ignore
+const SysConfigDetails = () => import('../entities/sys-config/sys-config-details.vue');
 // jhipster-needle-add-entity-to-router-import - JHipster will import entities to the router here
 
 Vue.use(Router);
@@ -240,6 +246,31 @@ export default new Router({
       path: '/production/:productionId/view',
       name: 'ProductionView',
       component: ProductionDetails,
+      meta: { authorities: ['ROLE_USER'] }
+    }
+    ,
+    {
+      path: '/sys-config',
+      name: 'SysConfig',
+      component: SysConfig,
+      meta: { authorities: ['ROLE_USER'] }
+    },
+    {
+      path: '/sys-config/new',
+      name: 'SysConfigCreate',
+      component: SysConfigUpdate,
+      meta: { authorities: ['ROLE_USER'] }
+    },
+    {
+      path: '/sys-config/:sysConfigId/edit',
+      name: 'SysConfigEdit',
+      component: SysConfigUpdate,
+      meta: { authorities: ['ROLE_USER'] }
+    },
+    {
+      path: '/sys-config/:sysConfigId/view',
+      name: 'SysConfigView',
+      component: SysConfigDetails,
       meta: { authorities: ['ROLE_USER'] }
     }
     // jhipster-needle-add-entity-to-router - JHipster will add entities to the router here
