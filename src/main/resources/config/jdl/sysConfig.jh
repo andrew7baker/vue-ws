@@ -12,12 +12,12 @@ entity SysRelationType {
 
 // 系统文件表
 entity SysFileInfo {
-    file_bucket String,
-    file_name String,
-    file_suffix String,
+    fileBucket String,
+    fileName String,
+    fileSuffix String,
     file_size_kb long,
-    final_name String,
-    file_path String,
+    finalName String,
+    filePath String,
     createTime Instant,
     createUser Long,
     updateTime Instant,
@@ -26,10 +26,10 @@ entity SysFileInfo {
 
 // 系统日志
 entity SysFileInfo {
-    log_type String,
-    log_name String,
-    user_id Long,
-    class_name String,
+    logType String,
+    logName String,
+    userId Long,
+    className String,
     method String,
     succeed String,       //字典值
     createTime Instant,
