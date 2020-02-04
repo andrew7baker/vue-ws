@@ -36,7 +36,7 @@ entity SysFileInfo {
     message String
 }
 
-paginate SysConfig with pagination
+paginate * with pagination
 
 // Set service options to all except few
 service all with serviceImpl
