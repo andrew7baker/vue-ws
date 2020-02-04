@@ -1,11 +1,10 @@
 package com.mycompany.myapp.util;
 
+import com.mycompany.myapp.domain.Production;
 import com.mycompany.myapp.domain.SysFileInfo;
 import com.mycompany.myapp.domain.SysOperationLog;
-import com.mycompany.myapp.service.CommonService;
-import com.mycompany.myapp.service.SysFileInfoService;
-import com.mycompany.myapp.service.SysOperationLogService;
-import jcifs.UniAddress;
+import com.mycompany.myapp.domain.SysRelation;
+import com.mycompany.myapp.service.*;
 import jcifs.smb.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,11 +23,16 @@ public class SambaUtil {
     private final SysFileInfoService sysFileInfoService;
 
     private final CommonService commonService;
+    private final ProductionService productionService;
+    private final SysRelationService sysRelationService;
 
-    public SambaUtil(SysOperationLogService sysOperationLogService, SysFileInfoService sysFileInfoService, CommonService commonService) {
+    public SambaUtil(SysOperationLogService sysOperationLogService, SysFileInfoService sysFileInfoService, CommonService commonService, ProductionService productionService, SysRelationService sysRelationService) {
         this.sysOperationLogService = sysOperationLogService;
         this.sysFileInfoService = sysFileInfoService;
         this.commonService = commonService;
+        this.productionService = productionService;
+        this.sysRelationService = sysRelationService;
+        ;
     }
 
     /**
@@ -77,10 +81,7 @@ public class SambaUtil {
                 out.write(buffer);
                 buffer = new byte[1024];
             }
-            SysFileInfo sysFileInfo = new SysFileInfo();
-            sysFileInfo.setCreateTime(Instant.now());
-            sysFileInfo.setFileName(remoteSmbFile.getName());
-            this.sysFileInfoService.save(sysFileInfo);
+
         } catch (Exception e) {
             message = "下载过程中出现错误";
             log.info(message);
@@ -193,7 +194,7 @@ public class SambaUtil {
      */
     public void checkRemoteSimpleUrl(String url) throws UnknownHostException, SmbException, MalformedURLException{
         SmbFile smbfile=new SmbFile("smb://"+url);
-        String localDir = "./tmp-fileupload";
+        String localDir = "./tmp-fileupload/";
         String fileName = "";
         log.info("【smbfile="+smbfile+"】");
         try {
@@ -202,12 +203,29 @@ public class SambaUtil {
             }
             else{
                 SmbFile[] files = smbfile.listFiles();
+                Production  p = new Production();
+                Production  resultP = new Production();
+                SysFileInfo resultSysFileInfo = new SysFileInfo();
                 for (SmbFile f : files) {
                     fileName = f.getName();
 //                    log.info("文件名【"+fileName+"】");
                     if(commonService.getSysFileInfoByName(fileName)){
                         SmbFile remoteSmbFile = new SmbFile("smb://"+url+fileName);
                         String message = this.downloadFileFromSamba(remoteSmbFile, localDir);
+
+                        p = new Production();
+                        readFile(localDir+fileName,p);
+                        resultP=productionService.save(p);
+                        SysFileInfo sysFileInfo = new SysFileInfo();
+                        sysFileInfo.setCreateTime(Instant.now());
+                        sysFileInfo.setFileName(remoteSmbFile.getName());
+                        resultSysFileInfo=this.sysFileInfoService.save(sysFileInfo);
+                        SysRelation sysRelation =  new SysRelation();
+                        sysRelation.setFromId(resultP.getId());
+                        sysRelation.setToId(resultSysFileInfo.getId());
+                        sysRelation.setTypeCode("SMT_Prod_File");
+                        sysRelationService.save(sysRelation);
+                        //更新日志
                         SysOperationLog sysOperationLog = new SysOperationLog();
                         sysOperationLog.setMessage(message);
                         sysOperationLog.setCreateTime(Instant.now());
@@ -223,8 +241,56 @@ public class SambaUtil {
         }
     }
 
+    private void readFile(String fullFileName,Production p){
+        BufferedReader reader;
+        try {
+            String line = "";
+            String strValue = "";
+            reader = new BufferedReader(new FileReader(
+                fullFileName));
+            for(int i=0;i<26;i++){
+                line = reader.readLine();
+//                if(i%5==0)
+//                    System.out.println("");
+                strValue = line.split(":")[1].substring(1);
+//                System.out.println(strValue+" "+line);
+                if(i==0){ p.setVersion(strValue); }
+                if(i==1){ p.setPowerTime(Integer.parseInt(strValue)); }
+                if(i==2){ p.setPlaceTime(Integer.parseInt(strValue)); }
+                if(i==3){ p.setWaitTime(Integer.parseInt(strValue)); }
+                if(i==4){ p.setRunTime(Integer.parseInt(strValue)); }
 
+                if(i==5){ p.setStopTime(Integer.parseInt(strValue)); }
+                if(i==6){ p.setIdleTime(Integer.parseInt(strValue)); }
+                if(i==7){ p.setInWaitTime(Integer.parseInt(strValue)); }
+                if(i==8){ p.setOutWaitTime(Integer.parseInt(strValue)); }
+                if(i==9){ p.setTransTime(Integer.parseInt(strValue)); }
 
+                if(i==10){ p.setWrongStopTime(Integer.parseInt(strValue)); }
+                if(i==11){ p.setErrorStopTIme(Integer.parseInt(strValue)); }
+                if(i==12){ p.setWrongStopCount(Integer.parseInt(strValue)); }
+                if(i==13){ p.setErrorStopCount(Integer.parseInt(strValue)); }
+                if(i==14){ p.setPanelInCount(Integer.parseInt(strValue)); }
+
+                if(i==15){ p.panelOutCount(Integer.parseInt(strValue)); }
+                if(i==16){ p.setPanelCount(Integer.parseInt(strValue)); }
+                if(i==17){ p.setpCBCount(Integer.parseInt(strValue)); }
+                if(i==18){ p.setErrorPcb(Integer.parseInt(strValue)); }
+                if(i==19){ p.setSkipPCB(Integer.parseInt(strValue)); }
+
+                if(i==20){ p.setOperationRate(Float.parseFloat(strValue)); }
+                if(i==21){ p.setPlacementRate(Float.parseFloat(strValue)); }
+                if(i==22){ p.setMeanTime(Float.parseFloat(strValue)); }
+                if(i==23){ p.setRealTime(Float.parseFloat(strValue)); }
+                if(i==24){ p.setTransferTime(Float.parseFloat(strValue)); }
+
+                if(i==25){ p.setPlaceCount(Integer.parseInt(strValue)); }
+            }
+            reader.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     public static void main(String[] args) throws UnknownHostException, SmbException, MalformedURLException {
 //        String host = "192.168.xxx.xxx";
