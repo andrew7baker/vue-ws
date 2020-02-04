@@ -1,16 +1,39 @@
-// 系统配置表
-entity SysConfig {
-	name String,
-    code String,
-    dictFlag String,
-    dictTypeId Long,
-    value String,
-    remark String,
-    remark String,
+// 系统关系表
+entity SysRelation {
+    fromId Long,
+    toId Long,
+    typedId Long
+}
+
+// 系统关系类型
+entity SysRelationType {
+    typedName String
+}
+
+// 系统文件表
+entity SysFileInfo {
+    file_bucket String,
+    file_name String,
+    file_suffix String,
+    file_size_kb long,
+    final_name String,
+    file_path String,
     createTime Instant,
     createUser Long,
     updateTime Instant,
     updateUser Long
+}
+
+// 系统日志
+entity SysFileInfo {
+    log_type String,
+    log_name String,
+    user_id Long,
+    class_name String,
+    method String,
+    succeed String,       //字典值
+    createTime Instant,
+    message String
 }
 
 paginate SysConfig with pagination

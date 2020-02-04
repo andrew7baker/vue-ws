@@ -1,3 +1,18 @@
+// 系统配置表
+entity SysConfig {
+	name String,
+    code String,
+    dictFlag String,
+    dictTypeId Long,
+    value String,
+    remark String,
+    remark String,
+    createTime Instant,
+    createUser Long,
+    updateTime Instant,
+    updateUser Long
+}
+
 // 系统部门表
 entity SysDept {
     parentId Long,
