@@ -1,5 +1,8 @@
 package com.mycompany.myapp.util;
 
+import com.mycompany.myapp.domain.SysOperationLog;
+import com.mycompany.myapp.service.ProductionService;
+import com.mycompany.myapp.service.SysOperationLogService;
 import jcifs.UniAddress;
 import jcifs.smb.*;
 import org.slf4j.Logger;
@@ -8,11 +11,17 @@ import org.slf4j.LoggerFactory;
 import java.io.*;
 import java.net.MalformedURLException;
 import java.net.UnknownHostException;
+import java.time.Instant;
 
 public class SambaUtil {
 
     private final Logger log = LoggerFactory.getLogger(SambaUtil.class);
-    public SambaUtil() {}
+
+    private final SysOperationLogService sysOperationLogService;
+
+    public SambaUtil(SysOperationLogService sysOperationLogService) {
+        this.sysOperationLogService = sysOperationLogService;
+    }
 
     /**
      * 从samba服务器上下载指定的文件到本地目录
@@ -23,9 +32,9 @@ public class SambaUtil {
 
     public String downloadFileFromSamba(SmbFile remoteSmbFile, String localDir) throws SmbException {
 
-        String message = "下载成功";
+        String message = "下载成功:"+remoteSmbFile.getPath();
         if (!remoteSmbFile.exists()) {
-            message = "Samba服务器远程文件不存在"+remoteSmbFile.getPath()+remoteSmbFile.getName();
+            message = "Samba服务器远程文件不存在"+remoteSmbFile.getPath();
             log.info(message);
         }
         if((localDir == null) || ("".equals(localDir.trim()))) {
@@ -149,7 +158,13 @@ public class SambaUtil {
         NtlmPasswordAuthentication auth = new NtlmPasswordAuthentication(host, username, password);
         //创建Smb文件,地址一定要使用smb://
         SmbFile remoteSmbFile = new SmbFile("smb://" + host + filePath, auth);
-        log.info(this.downloadFileFromSamba(remoteSmbFile, demo1LocalDir));
+        String message = this.downloadFileFromSamba(remoteSmbFile, demo1LocalDir);
+        SysOperationLog sysOperationLog = new SysOperationLog();
+        sysOperationLog.setMessage(message);
+        sysOperationLog.setCreateTime(Instant.now());
+
+        log.info(message);
+        sysOperationLogService.save(sysOperationLog);
     }
 
     public static void main(String[] args) throws UnknownHostException, SmbException, MalformedURLException {

@@ -32,6 +32,10 @@ import SysConfigService from '@/entities/sys-config/sys-config.service';
 import SysDictService from '@/entities/sys-dict/sys-dict.service';
 import SysDictTypeService from '@/entities/sys-dict-type/sys-dict-type.service';
 import SysDeptService from '@/entities/sys-dept/sys-dept.service';
+import SysRelationService from '@/entities/sys-relation/sys-relation.service';
+import SysRelationTypeService from '@/entities/sys-relation-type/sys-relation-type.service';
+import SysFileInfoService from '@/entities/sys-file-info/sys-file-info.service';
+import SysOperationLogService from '@/entities/sys-operation-log/sys-operation-log.service';
 // jhipster-needle-add-entity-service-to-main-import - JHipster will import entities services here
 
 Vue.config.productionTip = false;
@@ -95,6 +99,10 @@ new Vue({
     sysDictService: () => new SysDictService(),
     sysDictTypeService: () => new SysDictTypeService(),
     sysDeptService: () => new SysDeptService(),
+    sysRelationService: () => new SysRelationService(),
+    sysRelationTypeService: () => new SysRelationTypeService(),
+    sysFileInfoService: () => new SysFileInfoService(),
+    sysOperationLogService: () => new SysOperationLogService(),
     // jhipster-needle-add-entity-service-to-main - JHipster will import entities services here
     accountService: () => accountService
   },

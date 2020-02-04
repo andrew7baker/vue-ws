@@ -53,6 +53,22 @@
                         <font-awesome-icon icon="asterisk" />
                         <span >SysDept</span>
                     </b-dropdown-item>
+                    <b-dropdown-item to="/sys-relation">
+                        <font-awesome-icon icon="asterisk" />
+                        <span >SysRelation</span>
+                    </b-dropdown-item>
+                    <b-dropdown-item to="/sys-relation-type">
+                        <font-awesome-icon icon="asterisk" />
+                        <span >SysRelationType</span>
+                    </b-dropdown-item>
+                    <b-dropdown-item to="/sys-file-info">
+                        <font-awesome-icon icon="asterisk" />
+                        <span >SysFileInfo</span>
+                    </b-dropdown-item>
+                    <b-dropdown-item to="/sys-operation-log">
+                        <font-awesome-icon icon="asterisk" />
+                        <span >SysOperationLog</span>
+                    </b-dropdown-item>
                     <!-- jhipster-needle-add-entity-to-menu - JHipster will add entities to the menu here -->
                 </b-nav-item-dropdown>
                 <b-nav-item-dropdown

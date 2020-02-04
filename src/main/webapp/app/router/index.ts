@@ -67,6 +67,30 @@ const SysDept = () => import('../entities/sys-dept/sys-dept.vue');
 const SysDeptUpdate = () => import('../entities/sys-dept/sys-dept-update.vue');
 // prettier-ignore
 const SysDeptDetails = () => import('../entities/sys-dept/sys-dept-details.vue');
+// prettier-ignore
+const SysRelation = () => import('../entities/sys-relation/sys-relation.vue');
+// prettier-ignore
+const SysRelationUpdate = () => import('../entities/sys-relation/sys-relation-update.vue');
+// prettier-ignore
+const SysRelationDetails = () => import('../entities/sys-relation/sys-relation-details.vue');
+// prettier-ignore
+const SysRelationType = () => import('../entities/sys-relation-type/sys-relation-type.vue');
+// prettier-ignore
+const SysRelationTypeUpdate = () => import('../entities/sys-relation-type/sys-relation-type-update.vue');
+// prettier-ignore
+const SysRelationTypeDetails = () => import('../entities/sys-relation-type/sys-relation-type-details.vue');
+// prettier-ignore
+const SysFileInfo = () => import('../entities/sys-file-info/sys-file-info.vue');
+// prettier-ignore
+const SysFileInfoUpdate = () => import('../entities/sys-file-info/sys-file-info-update.vue');
+// prettier-ignore
+const SysFileInfoDetails = () => import('../entities/sys-file-info/sys-file-info-details.vue');
+// prettier-ignore
+const SysOperationLog = () => import('../entities/sys-operation-log/sys-operation-log.vue');
+// prettier-ignore
+const SysOperationLogUpdate = () => import('../entities/sys-operation-log/sys-operation-log-update.vue');
+// prettier-ignore
+const SysOperationLogDetails = () => import('../entities/sys-operation-log/sys-operation-log-details.vue');
 // jhipster-needle-add-entity-to-router-import - JHipster will import entities to the router here
 
 Vue.use(Router);
@@ -364,6 +388,106 @@ export default new Router({
       path: '/sys-dept/:sysDeptId/view',
       name: 'SysDeptView',
       component: SysDeptDetails,
+      meta: { authorities: ['ROLE_USER'] }
+    }
+    ,
+    {
+      path: '/sys-relation',
+      name: 'SysRelation',
+      component: SysRelation,
+      meta: { authorities: ['ROLE_USER'] }
+    },
+    {
+      path: '/sys-relation/new',
+      name: 'SysRelationCreate',
+      component: SysRelationUpdate,
+      meta: { authorities: ['ROLE_USER'] }
+    },
+    {
+      path: '/sys-relation/:sysRelationId/edit',
+      name: 'SysRelationEdit',
+      component: SysRelationUpdate,
+      meta: { authorities: ['ROLE_USER'] }
+    },
+    {
+      path: '/sys-relation/:sysRelationId/view',
+      name: 'SysRelationView',
+      component: SysRelationDetails,
+      meta: { authorities: ['ROLE_USER'] }
+    }
+    ,
+    {
+      path: '/sys-relation-type',
+      name: 'SysRelationType',
+      component: SysRelationType,
+      meta: { authorities: ['ROLE_USER'] }
+    },
+    {
+      path: '/sys-relation-type/new',
+      name: 'SysRelationTypeCreate',
+      component: SysRelationTypeUpdate,
+      meta: { authorities: ['ROLE_USER'] }
+    },
+    {
+      path: '/sys-relation-type/:sysRelationTypeId/edit',
+      name: 'SysRelationTypeEdit',
+      component: SysRelationTypeUpdate,
+      meta: { authorities: ['ROLE_USER'] }
+    },
+    {
+      path: '/sys-relation-type/:sysRelationTypeId/view',
+      name: 'SysRelationTypeView',
+      component: SysRelationTypeDetails,
+      meta: { authorities: ['ROLE_USER'] }
+    }
+    ,
+    {
+      path: '/sys-file-info',
+      name: 'SysFileInfo',
+      component: SysFileInfo,
+      meta: { authorities: ['ROLE_USER'] }
+    },
+    {
+      path: '/sys-file-info/new',
+      name: 'SysFileInfoCreate',
+      component: SysFileInfoUpdate,
+      meta: { authorities: ['ROLE_USER'] }
+    },
+    {
+      path: '/sys-file-info/:sysFileInfoId/edit',
+      name: 'SysFileInfoEdit',
+      component: SysFileInfoUpdate,
+      meta: { authorities: ['ROLE_USER'] }
+    },
+    {
+      path: '/sys-file-info/:sysFileInfoId/view',
+      name: 'SysFileInfoView',
+      component: SysFileInfoDetails,
+      meta: { authorities: ['ROLE_USER'] }
+    }
+    ,
+    {
+      path: '/sys-operation-log',
+      name: 'SysOperationLog',
+      component: SysOperationLog,
+      meta: { authorities: ['ROLE_USER'] }
+    },
+    {
+      path: '/sys-operation-log/new',
+      name: 'SysOperationLogCreate',
+      component: SysOperationLogUpdate,
+      meta: { authorities: ['ROLE_USER'] }
+    },
+    {
+      path: '/sys-operation-log/:sysOperationLogId/edit',
+      name: 'SysOperationLogEdit',
+      component: SysOperationLogUpdate,
+      meta: { authorities: ['ROLE_USER'] }
+    },
+    {
+      path: '/sys-operation-log/:sysOperationLogId/view',
+      name: 'SysOperationLogView',
+      component: SysOperationLogDetails,
       meta: { authorities: ['ROLE_USER'] }
     }
     // jhipster-needle-add-entity-to-router - JHipster will add entities to the router here

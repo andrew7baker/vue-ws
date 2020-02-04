@@ -1,0 +1,28 @@
+{
+    "name": "SysRelation",
+    "fields": [
+        {
+            "fieldName": "fromId",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "toId",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "typeCode",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [],
+    "changelogDate": "20200204083954",
+    "entityTableName": "sys_relation",
+    "dto": "no",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

@@ -1,0 +1,24 @@
+{
+    "name": "SysRelationType",
+    "fields": [
+        {
+            "fieldName": "typeCode",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "typedName",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [],
+    "changelogDate": "20200204083955",
+    "entityTableName": "sys_relation_type",
+    "dto": "no",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

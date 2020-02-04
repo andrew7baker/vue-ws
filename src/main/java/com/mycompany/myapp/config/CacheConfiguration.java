@@ -50,6 +50,10 @@ public class CacheConfiguration {
             createCache(cm, com.mycompany.myapp.domain.SysDict.class.getName());
             createCache(cm, com.mycompany.myapp.domain.SysDictType.class.getName());
             createCache(cm, com.mycompany.myapp.domain.SysDept.class.getName());
+            createCache(cm, com.mycompany.myapp.domain.SysRelation.class.getName());
+            createCache(cm, com.mycompany.myapp.domain.SysRelationType.class.getName());
+            createCache(cm, com.mycompany.myapp.domain.SysFileInfo.class.getName());
+            createCache(cm, com.mycompany.myapp.domain.SysOperationLog.class.getName());
             // jhipster-needle-ehcache-add-entry
         };
     }

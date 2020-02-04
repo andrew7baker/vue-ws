@@ -19,6 +19,12 @@ public class SmtService {
 
     private final Logger log = LoggerFactory.getLogger(SmtService.class);
 
+    private final SysOperationLogService sysOperationLogService;
+
+    public SmtService(SysOperationLogService sysOperationLogService) {
+        this.sysOperationLogService = sysOperationLogService;
+    }
+
     /**
      * 从字典表取机器列表
      * dicType = MACHINE_CODE
@@ -41,7 +47,7 @@ public class SmtService {
     public void captureMachineData() throws MalformedURLException, UnknownHostException, SmbException {
         List<SysDict> list=this.getMachineList();
         //用 备注替代 IP地址
-        SambaUtil sambaUtil = new SambaUtil();
+        SambaUtil sambaUtil = new SambaUtil(this.sysOperationLogService);
         for(int i=0;i<list.size();i++){
             String ip = ((SysDict)list.get(i)).getDescription();
             log.info("ip="+ip);
