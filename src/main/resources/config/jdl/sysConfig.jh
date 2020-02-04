@@ -15,7 +15,7 @@ entity SysFileInfo {
     fileBucket String,
     fileName String,
     fileSuffix String,
-    file_size_kb long,
+    fileSizeKb long,
     finalName String,
     filePath String,
     createTime Instant,
