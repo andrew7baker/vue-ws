@@ -194,7 +194,7 @@ public class SambaUtil {
      */
     public void checkRemoteSimpleUrl(String url) throws UnknownHostException, SmbException, MalformedURLException{
         SmbFile smbfile=new SmbFile("smb://"+url);
-        String localDir = "./tmp-fileupload/";
+        String localDir = "."+File.separator+"tmp-fileupload/";
         String fileName = "";
         log.info("【smbfile="+smbfile+"】");
         try {
