@@ -1,7 +1,9 @@
 package com.mycompany.myapp.util;
 
+import com.mycompany.myapp.domain.SysFileInfo;
 import com.mycompany.myapp.domain.SysOperationLog;
-import com.mycompany.myapp.service.ProductionService;
+import com.mycompany.myapp.service.CommonService;
+import com.mycompany.myapp.service.SysFileInfoService;
 import com.mycompany.myapp.service.SysOperationLogService;
 import jcifs.UniAddress;
 import jcifs.smb.*;
@@ -19,8 +21,14 @@ public class SambaUtil {
 
     private final SysOperationLogService sysOperationLogService;
 
-    public SambaUtil(SysOperationLogService sysOperationLogService) {
+    private final SysFileInfoService sysFileInfoService;
+
+    private final CommonService commonService;
+
+    public SambaUtil(SysOperationLogService sysOperationLogService, SysFileInfoService sysFileInfoService, CommonService commonService) {
         this.sysOperationLogService = sysOperationLogService;
+        this.sysFileInfoService = sysFileInfoService;
+        this.commonService = commonService;
     }
 
     /**
@@ -32,7 +40,7 @@ public class SambaUtil {
 
     public String downloadFileFromSamba(SmbFile remoteSmbFile, String localDir) throws SmbException {
 
-        String message = "下载成功:"+remoteSmbFile.getPath();
+        String message = "   【下载成功】"+remoteSmbFile.getPath();
         if (!remoteSmbFile.exists()) {
             message = "Samba服务器远程文件不存在"+remoteSmbFile.getPath();
             log.info(message);
@@ -69,6 +77,10 @@ public class SambaUtil {
                 out.write(buffer);
                 buffer = new byte[1024];
             }
+            SysFileInfo sysFileInfo = new SysFileInfo();
+            sysFileInfo.setCreateTime(Instant.now());
+            sysFileInfo.setFileName(remoteSmbFile.getName());
+            this.sysFileInfoService.save(sysFileInfo);
         } catch (Exception e) {
             message = "下载过程中出现错误";
             log.info(message);
@@ -124,7 +136,6 @@ public class SambaUtil {
                 out.write(buffer);
                 buffer = new byte[1024];
             }
-
         } catch  (Exception e) {
             e.printStackTrace();
 
@@ -145,41 +156,89 @@ public class SambaUtil {
      * @throws SmbException
      * @throws MalformedURLException
      */
-    public void checkRemote(String host) throws UnknownHostException, SmbException, MalformedURLException{
-        String username = "administrator";
-        String password = "123";
+//    public void checkRemote(String host) throws UnknownHostException, SmbException, MalformedURLException{
+//        String username = "administrator";
+//        String password = "123";
+//
+//        //samba服务器上的文件
+//        String fileName = "20191214_140304_SFU605_M_303.txt";
+//
+//        String SMT_SHARE_FOLDER = commonService.getSingleSysDict("SMT_SHARE_FOLDER") == "" ? "/share" : commonService.getSingleSysDict("SMT_SHARE_FOLDER");
+//        String filePath = SMT_SHARE_FOLDER+"/20191214_140304_SFU605_M_303.txt";
+//        String demo1LocalDir = "./tmp-fileupload";
+//        log.info("host="+host);
+//        UniAddress ua = UniAddress.getByName(host);
+//        NtlmPasswordAuthentication auth = new NtlmPasswordAuthentication(host, username, password);
+//
+//        //创建Smb文件,地址一定要使用smb://
+//        SmbFile remoteSmbFile = new SmbFile("smb://" + host + filePath, auth);
+//        if(commonService.getSysFileInfoByName(fileName)){
+//            String message = this.downloadFileFromSamba(remoteSmbFile, demo1LocalDir);
+//            SysOperationLog sysOperationLog = new SysOperationLog();
+//            sysOperationLog.setMessage(message);
+//            sysOperationLog.setCreateTime(Instant.now());
+//            log.info(message);
+//            sysOperationLogService.save(sysOperationLog);
+//        }else {
+//            log.info("文件已经存在不需要获取======="+fileName);
+//        }
+//    }
 
-        //samba服务器上的文件
-        String filePath = "/share/20191214_140304_SFU605_M_303.txt";
-//        String filePath = "/share/20191214_140304_SFU605_M_303.txt2";
-        String demo1LocalDir = "./tmp-fileupload";
-        log.info("host="+host);
-        UniAddress ua = UniAddress.getByName(host);
-        NtlmPasswordAuthentication auth = new NtlmPasswordAuthentication(host, username, password);
-        //创建Smb文件,地址一定要使用smb://
-        SmbFile remoteSmbFile = new SmbFile("smb://" + host + filePath, auth);
-        String message = this.downloadFileFromSamba(remoteSmbFile, demo1LocalDir);
-        SysOperationLog sysOperationLog = new SysOperationLog();
-        sysOperationLog.setMessage(message);
-        sysOperationLog.setCreateTime(Instant.now());
-
-        log.info(message);
-        sysOperationLogService.save(sysOperationLog);
+    /**
+     * 简化路径
+     * @param url
+     * @throws UnknownHostException
+     * @throws SmbException
+     * @throws MalformedURLException
+     */
+    public void checkRemoteSimpleUrl(String url) throws UnknownHostException, SmbException, MalformedURLException{
+        SmbFile smbfile=new SmbFile("smb://"+url);
+        String localDir = "./tmp-fileupload";
+        String fileName = "";
+        log.info("【smbfile="+smbfile+"】");
+        try {
+            if(!smbfile.exists()){
+                System.out.println("no such folder");
+            }
+            else{
+                SmbFile[] files = smbfile.listFiles();
+                for (SmbFile f : files) {
+                    fileName = f.getName();
+//                    log.info("文件名【"+fileName+"】");
+                    if(commonService.getSysFileInfoByName(fileName)){
+                        SmbFile remoteSmbFile = new SmbFile("smb://"+url+fileName);
+                        String message = this.downloadFileFromSamba(remoteSmbFile, localDir);
+                        SysOperationLog sysOperationLog = new SysOperationLog();
+                        sysOperationLog.setMessage(message);
+                        sysOperationLog.setCreateTime(Instant.now());
+                        log.info(message);
+                        sysOperationLogService.save(sysOperationLog);
+                    }else {
+                        log.info("   【文件已经存在不需要获取============"+fileName+"】");
+                    }
+                }
+            }
+        } catch (SmbException e) {
+            e.printStackTrace();
+        }
     }
 
-    public static void main(String[] args) throws UnknownHostException, SmbException, MalformedURLException {
-        String host = "192.168.xxx.xxx";
-        String username = "username";
-        String password = "password";
 
-        //samba服务器上的文件
-        String filePath = "/a/b/xxx.pdf";
-        String demo1LocalDir = "E:\\test\\samba";
-        UniAddress ua = UniAddress.getByName(host);
-        NtlmPasswordAuthentication auth = new NtlmPasswordAuthentication(host, username, password);
-        SmbSession.logon(ua, auth);//验证是否能够成功登录
-        //创建Smb文件,地址一定要使用smb://
-        SmbFile remoteSmbFile = new SmbFile("smb://" + host + filePath, auth);
+
+
+    public static void main(String[] args) throws UnknownHostException, SmbException, MalformedURLException {
+//        String host = "192.168.xxx.xxx";
+//        String username = "username";
+//        String password = "password";
+//
+//        //samba服务器上的文件
+//        String filePath = "/a/b/xxx.pdf";
+//        String demo1LocalDir = "E:\\test\\samba";
+//        UniAddress ua = UniAddress.getByName(host);
+//        NtlmPasswordAuthentication auth = new NtlmPasswordAuthentication(host, username, password);
+//        SmbSession.logon(ua, auth);//验证是否能够成功登录
+//        //创建Smb文件,地址一定要使用smb://
+//        SmbFile remoteSmbFile = new SmbFile("smb://" + host + filePath, auth);
 //        SambaUtil.downloadFileFromSamba(remoteSmbFile, demo1LocalDir);
 //        System.out.println("download success");
 //

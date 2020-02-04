@@ -20,41 +20,27 @@ public class SmtService {
     private final Logger log = LoggerFactory.getLogger(SmtService.class);
 
     private final SysOperationLogService sysOperationLogService;
+    private final SysFileInfoService sysFileInfoService;
+    private final CommonService commonService;
 
-    public SmtService(SysOperationLogService sysOperationLogService) {
+    public SmtService(SysOperationLogService sysOperationLogService, SysFileInfoService sysFileInfoService, CommonService commonService) {
         this.sysOperationLogService = sysOperationLogService;
-    }
-
-    /**
-     * 从字典表取机器列表
-     * dicType = MACHINE_CODE
-     */
-    public List<SysDict> getMachineList(){
-        // TODO:数据源需要动态取参数
-        Jdbi jdbi = Jdbi.create("jdbc:postgresql://tx:5432/smt?", "smt", "smt");
-        log.info("jdbi"+jdbi);
-        List<SysDict> list =jdbi.withHandle(handle ->
-            handle.createQuery("SELECT d.* from sys_dict d join  sys_dict_type  t on d.dic_type_id=t.id and t.code='MACHINE_CODE' ")
-                .mapToBean(SysDict.class)
-                .list());
-        log.info("list"+list);
-        return list;
+        this.sysFileInfoService = sysFileInfoService;
+        this.commonService = commonService;
     }
 
     /**
      * 抓取局域网对应IP 地址的日志
      */
     public void captureMachineData() throws MalformedURLException, UnknownHostException, SmbException {
-        List<SysDict> list=this.getMachineList();
+        List<SysDict> list=commonService.getMachineList("SMT_MACHINE_CODE");
         //用 备注替代 IP地址
-        SambaUtil sambaUtil = new SambaUtil(this.sysOperationLogService);
+        SambaUtil sambaUtil = new SambaUtil(this.sysOperationLogService,this.sysFileInfoService, commonService);
         for(int i=0;i<list.size();i++){
-            String ip = ((SysDict)list.get(i)).getDescription();
-            log.info("ip="+ip);
-            if(ip!=null)
-                sambaUtil.checkRemote(ip);
+            String url = ((SysDict)list.get(i)).getDescription();
+            log.info("【url="+url+"】");
+            if(url!=null)
+                sambaUtil.checkRemoteSimpleUrl(url);
         }
-
     }
-
 }
