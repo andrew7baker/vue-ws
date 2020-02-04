@@ -2,11 +2,12 @@
 entity SysRelation {
     fromId Long,
     toId Long,
-    typedId Long
+    typeCode String
 }
 
 // 系统关系类型
 entity SysRelationType {
+    typeCode String,
     typedName String
 }
 
