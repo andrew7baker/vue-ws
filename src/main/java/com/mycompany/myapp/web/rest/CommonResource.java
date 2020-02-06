@@ -1,8 +1,14 @@
 package com.mycompany.myapp.web.rest;
 
 import com.mycompany.myapp.domain.Production;
+import com.mycompany.myapp.domain.SysFileInfo;
 import com.mycompany.myapp.service.CommonService;
+import org.jdbi.v3.core.Handle;
 import org.jdbi.v3.core.Jdbi;
+import org.jdbi.v3.core.generic.GenericType;
+import org.jdbi.v3.core.mapper.JoinRow;
+import org.jdbi.v3.core.mapper.JoinRowMapper;
+import org.jdbi.v3.core.mapper.reflect.ConstructorMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
@@ -40,8 +46,6 @@ public class CommonResource {
         return ResponseEntity.ok(this.commonService.getMachineList("SMT_MACHINE_CODE"));
     }
 
-
-
     /**
      * 获取列表产品列表
      * @return
@@ -67,4 +71,21 @@ public class CommonResource {
         return ResponseEntity.ok(a);
     }
 
+    /**
+     * 110 机器
+     * @return
+     */
+    @PostMapping("/getReport")
+    public ResponseEntity getReport(@RequestBody Map<String, Object> params) {
+        Map<String, Object> map = new HashMap<>(3);
+        Jdbi jdbi = Jdbi.create("jdbc:postgresql://tx:5432/smt?", "smt", "smt");
+        Map a = new HashMap<>();
+        List<Map<String, Object>> list =jdbi.withHandle(handle ->
+            handle.createQuery("SELECT f.file_name,t.*,f.* from (SELECT r.*,p.id prd_id FROM sys_relation r join production p  on " +
+                "p.id=r.from_id) t left JOIN sys_file_info f on t.to_id = f.id  ")
+                .mapToMap()
+                .list());
+        a.put("data",list );
+        return ResponseEntity.ok(a);
+    }
 }

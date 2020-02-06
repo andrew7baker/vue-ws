@@ -215,31 +215,38 @@ public class SambaUtil {
                 SysFileInfo resultSysFileInfo = new SysFileInfo();
                 for (SmbFile f : files) {
                     fileName = f.getName();
-//                    log.info("文件名【"+fileName+"】");
-                    if(commonService.getSysFileInfoByName(fileName)){
-                        SmbFile remoteSmbFile = new SmbFile("smb://"+url+fileName);
-                        String message = this.downloadFileFromSamba(remoteSmbFile, localDir);
+//                    log.info("文件名【"+fileName+"】"+fileName.split("\\.").length);
 
-                        p = new Production();
-                        readFile(localDir+fileName,p);
-                        resultP=productionService.save(p);
-                        SysFileInfo sysFileInfo = new SysFileInfo();
-                        sysFileInfo.setCreateTime(Instant.now());
-                        sysFileInfo.setFileName(remoteSmbFile.getName());
-                        resultSysFileInfo=this.sysFileInfoService.save(sysFileInfo);
-                        SysRelation sysRelation =  new SysRelation();
-                        sysRelation.setFromId(resultP.getId());
-                        sysRelation.setToId(resultSysFileInfo.getId());
-                        sysRelation.setTypeCode("SMT_Prod_File");
-                        sysRelationService.save(sysRelation);
-                        //更新日志
-                        SysOperationLog sysOperationLog = new SysOperationLog();
-                        sysOperationLog.setMessage(message);
-                        sysOperationLog.setCreateTime(Instant.now());
-                        log.info(message);
-                        sysOperationLogService.save(sysOperationLog);
-                    }else {
-                        log.info("   【文件已经存在不需要获取============"+fileName+"】");
+                    if(fileName.split("\\.").length>1){
+                        // 后缀为 log文件才解析
+
+                        if("log".equals(fileName.split("\\.")[1])){
+                            if(commonService.getSysFileInfoByName(fileName)){
+                                SmbFile remoteSmbFile = new SmbFile("smb://"+url+fileName);
+                                String message = this.downloadFileFromSamba(remoteSmbFile, localDir);
+
+                                p = new Production();
+                                readFile(localDir+fileName,p);
+                                resultP=productionService.save(p);
+                                SysFileInfo sysFileInfo = new SysFileInfo();
+                                sysFileInfo.setCreateTime(Instant.now());
+                                sysFileInfo.setFileName(remoteSmbFile.getName());
+                                resultSysFileInfo=this.sysFileInfoService.save(sysFileInfo);
+                                SysRelation sysRelation =  new SysRelation();
+                                sysRelation.setFromId(resultP.getId());
+                                sysRelation.setToId(resultSysFileInfo.getId());
+                                sysRelation.setTypeCode("SMT_Prod_File");
+                                sysRelationService.save(sysRelation);
+                                //更新日志
+                                SysOperationLog sysOperationLog = new SysOperationLog();
+                                sysOperationLog.setMessage(message);
+                                sysOperationLog.setCreateTime(Instant.now());
+                                log.info(message);
+                                sysOperationLogService.save(sysOperationLog);
+                            }else {
+                                log.info("   【文件已经存在不需要获取============"+fileName+"】");
+                            }
+                        }
                     }
                 }
             }
