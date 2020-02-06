@@ -43,7 +43,7 @@ public class CommonResource {
 
     @GetMapping("/getMachineList")
     public ResponseEntity getMachineList() {
-        return ResponseEntity.ok(this.commonService.getMachineList("SMT_MACHINE_CODE"));
+        return ResponseEntity.ok(this.commonService.getMachineList("SMT_MACHINE_TYPE"));
     }
 
     /**
@@ -77,12 +77,21 @@ public class CommonResource {
      */
     @PostMapping("/getReport")
     public ResponseEntity getReport(@RequestBody Map<String, Object> params) {
-        Map<String, Object> map = new HashMap<>(3);
+        if(params!=null)
+            log.info("prodName="+params.get("prodName").toString()+";machineCode="+params.get("machineCode").toString());
         Jdbi jdbi = Jdbi.create("jdbc:postgresql://tx:5432/smt?", "smt", "smt");
+        String sql = "";
+        if(params.get("machineCode")!="")
+            sql = " and f.machine_code='"+params.get("machineCode").toString()+"'";
         Map a = new HashMap<>();
+        String finalSql = sql;
         List<Map<String, Object>> list =jdbi.withHandle(handle ->
-            handle.createQuery("SELECT f.file_name,t.*,f.* from (SELECT r.*,p.id prd_id FROM sys_relation r join production p  on " +
-                "p.id=r.from_id) t left JOIN sys_file_info f on t.to_id = f.id  ")
+            handle.createQuery(
+                "SELECT f.machine_code,f.machine_name,f.file_name from (SELECT r.*,p.id prd_id FROM sys_relation r join production p  on \n" +
+                    "p.id=r.from_id) t  JOIN (SELECT f.*,d.name machine_name FROM sys_file_info f JOIN \n" +
+                    "(SELECT * FROM sys_dict WHERE dic_type_id IN(SELECT ID from sys_dict_type WHERE code='SMT_MACHINE_TYPE')) d\n" +
+                    "ON f.machine_code = d.code) f on t.to_id = f.id "
+                + finalSql)
                 .mapToMap()
                 .list());
         a.put("data",list );

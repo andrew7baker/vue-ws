@@ -12,6 +12,7 @@ import SysFileInfoService from './sys-file-info.service';
 
 const validations: any = {
   sysFileInfo: {
+    machineCode: {},
     fileBucket: {},
     fileName: {},
     fileSuffix: {},

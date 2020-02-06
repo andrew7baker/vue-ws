@@ -1,18 +1,6 @@
-// 系统关系表
-entity SysRelation {
-    fromId Long,
-    toId Long,
-    typeCode String
-}
-
-// 系统关系类型
-entity SysRelationType {
-    typeCode String,
-    typedName String
-}
-
 // 系统文件表
 entity SysFileInfo {
+    machineCode String,
     fileBucket String,
     fileName String,
     fileSuffix String,
@@ -23,18 +11,6 @@ entity SysFileInfo {
     createUser Long,
     updateTime Instant,
     updateUser Long
-}
-
-// 系统日志
-entity SysOperationLog {
-    logType String,
-    logName String,
-    userId Long,
-    className String,
-    method String,
-    succeed String,       //字典值
-    createTime Instant,
-    message String
 }
 
 paginate * with pagination

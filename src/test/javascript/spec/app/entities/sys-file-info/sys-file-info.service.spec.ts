@@ -24,7 +24,7 @@ describe('Service Tests', () => {
       service = new SysFileInfoService();
       currentDate = new Date();
 
-      elemDefault = new SysFileInfo(0, 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', 0, 'AAAAAAA', 'AAAAAAA', currentDate, 0, currentDate, 0);
+      elemDefault = new SysFileInfo(0, 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', 0, 'AAAAAAA', 'AAAAAAA', currentDate, 0, currentDate, 0);
     });
 
     describe('Service methods', () => {
@@ -68,6 +68,7 @@ describe('Service Tests', () => {
       it('should update a SysFileInfo', async () => {
         const returnedFromService = Object.assign(
           {
+            machineCode: 'BBBBBB',
             fileBucket: 'BBBBBB',
             fileName: 'BBBBBB',
             fileSuffix: 'BBBBBB',
@@ -98,6 +99,7 @@ describe('Service Tests', () => {
       it('should return a list of SysFileInfo', async () => {
         const returnedFromService = Object.assign(
           {
+            machineCode: 'BBBBBB',
             fileBucket: 'BBBBBB',
             fileName: 'BBBBBB',
             fileSuffix: 'BBBBBB',

@@ -2,6 +2,10 @@
     "name": "SysFileInfo",
     "fields": [
         {
+            "fieldName": "machineCode",
+            "fieldType": "String"
+        },
+        {
             "fieldName": "fileBucket",
             "fieldType": "String"
         },
@@ -43,7 +47,7 @@
         }
     ],
     "relationships": [],
-    "changelogDate": "20200204083956",
+    "changelogDate": "20200206140905",
     "entityTableName": "sys_file_info",
     "dto": "no",
     "pagination": "pagination",

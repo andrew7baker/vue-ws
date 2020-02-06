@@ -25,6 +25,7 @@
                 <thead>
                 <tr>
                     <th v-on:click="changeOrder('id')"><span>ID</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
+                    <th v-on:click="changeOrder('machineCode')"><span>Machine Code</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
                     <th v-on:click="changeOrder('fileBucket')"><span>File Bucket</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
                     <th v-on:click="changeOrder('fileName')"><span>File Name</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
                     <th v-on:click="changeOrder('fileSuffix')"><span>File Suffix</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
@@ -44,6 +45,7 @@
                     <td>
                         <router-link :to="{name: 'SysFileInfoView', params: {sysFileInfoId: sysFileInfo.id}}">{{sysFileInfo.id}}</router-link>
                     </td>
+                    <td>{{sysFileInfo.machineCode}}</td>
                     <td>{{sysFileInfo.fileBucket}}</td>
                     <td>{{sysFileInfo.fileName}}</td>
                     <td>{{sysFileInfo.fileSuffix}}</td>

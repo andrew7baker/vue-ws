@@ -5,6 +5,12 @@
                 <h2 class="jh-entity-heading"><span>SysFileInfo</span> {{sysFileInfo.id}}</h2>
                 <dl class="row jh-entity-details">
                     <dt>
+                        <span>Machine Code</span>
+                    </dt>
+                    <dd>
+                        <span>{{sysFileInfo.machineCode}}</span>
+                    </dd>
+                    <dt>
                         <span>File Bucket</span>
                     </dt>
                     <dd>

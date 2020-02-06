@@ -1,9 +1,6 @@
 package com.mycompany.myapp.util;
 
-import com.mycompany.myapp.domain.Production;
-import com.mycompany.myapp.domain.SysFileInfo;
-import com.mycompany.myapp.domain.SysOperationLog;
-import com.mycompany.myapp.domain.SysRelation;
+import com.mycompany.myapp.domain.*;
 import com.mycompany.myapp.service.*;
 import jcifs.smb.*;
 import org.slf4j.Logger;
@@ -187,12 +184,13 @@ public class SambaUtil {
 
     /**
      * 简化路径
-     * @param url
+     * @param  sysDict
      * @throws UnknownHostException
      * @throws SmbException
      * @throws MalformedURLException
      */
-    public void checkRemoteSimpleUrl(String url) throws UnknownHostException, SmbException, MalformedURLException{
+    public void checkRemoteSimpleUrl( SysDict sysDict) throws UnknownHostException, SmbException, MalformedURLException{
+        String url = sysDict.getDescription();
         SmbFile smbfile=new SmbFile("smb://"+url);
         if(System.getProperty("catalina.base")!=null){
             log.info("【catalina.base】"+System.getProperty("catalina.base"));
@@ -229,6 +227,7 @@ public class SambaUtil {
                                 readFile(localDir+fileName,p);
                                 resultP=productionService.save(p);
                                 SysFileInfo sysFileInfo = new SysFileInfo();
+                                sysFileInfo.setMachineCode(sysDict.getCode());
                                 sysFileInfo.setCreateTime(Instant.now());
                                 sysFileInfo.setFileName(remoteSmbFile.getName());
                                 resultSysFileInfo=this.sysFileInfoService.save(sysFileInfo);

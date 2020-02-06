@@ -37,14 +37,14 @@ public class SmtService {
      * 抓取局域网对应IP 地址的日志
      */
     public void captureMachineData() throws MalformedURLException, UnknownHostException, SmbException {
-        List<SysDict> list=commonService.getMachineList("SMT_MACHINE_CODE");
+        List<SysDict> list=commonService.getMachineList("SMT_MACHINE_TYPE");
         //用 备注替代 IP地址
         SambaUtil sambaUtil = new SambaUtil(this.sysOperationLogService,this.sysFileInfoService, commonService, productionService, sysRelationService);
         for(int i=0;i<list.size();i++){
             String url = ((SysDict)list.get(i)).getDescription();
-            log.info("【url="+url+"】");
+            log.info("【url="+((SysDict)list.get(i)).getDescription()+"】");
             if(url!=null)
-                sambaUtil.checkRemoteSimpleUrl(url);
+                sambaUtil.checkRemoteSimpleUrl((SysDict)list.get(i));
         }
     }
 }

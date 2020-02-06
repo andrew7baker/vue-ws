@@ -36,6 +36,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = VuwsmtApp.class)
 public class SysFileInfoResourceIT {
 
+    private static final String DEFAULT_MACHINE_CODE = "AAAAAAAAAA";
+    private static final String UPDATED_MACHINE_CODE = "BBBBBBBBBB";
+
     private static final String DEFAULT_FILE_BUCKET = "AAAAAAAAAA";
     private static final String UPDATED_FILE_BUCKET = "BBBBBBBBBB";
 
@@ -111,6 +114,7 @@ public class SysFileInfoResourceIT {
      */
     public static SysFileInfo createEntity(EntityManager em) {
         SysFileInfo sysFileInfo = new SysFileInfo()
+            .machineCode(DEFAULT_MACHINE_CODE)
             .fileBucket(DEFAULT_FILE_BUCKET)
             .fileName(DEFAULT_FILE_NAME)
             .fileSuffix(DEFAULT_FILE_SUFFIX)
@@ -131,6 +135,7 @@ public class SysFileInfoResourceIT {
      */
     public static SysFileInfo createUpdatedEntity(EntityManager em) {
         SysFileInfo sysFileInfo = new SysFileInfo()
+            .machineCode(UPDATED_MACHINE_CODE)
             .fileBucket(UPDATED_FILE_BUCKET)
             .fileName(UPDATED_FILE_NAME)
             .fileSuffix(UPDATED_FILE_SUFFIX)
@@ -164,6 +169,7 @@ public class SysFileInfoResourceIT {
         List<SysFileInfo> sysFileInfoList = sysFileInfoRepository.findAll();
         assertThat(sysFileInfoList).hasSize(databaseSizeBeforeCreate + 1);
         SysFileInfo testSysFileInfo = sysFileInfoList.get(sysFileInfoList.size() - 1);
+        assertThat(testSysFileInfo.getMachineCode()).isEqualTo(DEFAULT_MACHINE_CODE);
         assertThat(testSysFileInfo.getFileBucket()).isEqualTo(DEFAULT_FILE_BUCKET);
         assertThat(testSysFileInfo.getFileName()).isEqualTo(DEFAULT_FILE_NAME);
         assertThat(testSysFileInfo.getFileSuffix()).isEqualTo(DEFAULT_FILE_SUFFIX);
@@ -207,6 +213,7 @@ public class SysFileInfoResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(sysFileInfo.getId().intValue())))
+            .andExpect(jsonPath("$.[*].machineCode").value(hasItem(DEFAULT_MACHINE_CODE)))
             .andExpect(jsonPath("$.[*].fileBucket").value(hasItem(DEFAULT_FILE_BUCKET)))
             .andExpect(jsonPath("$.[*].fileName").value(hasItem(DEFAULT_FILE_NAME)))
             .andExpect(jsonPath("$.[*].fileSuffix").value(hasItem(DEFAULT_FILE_SUFFIX)))
@@ -230,6 +237,7 @@ public class SysFileInfoResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(sysFileInfo.getId().intValue()))
+            .andExpect(jsonPath("$.machineCode").value(DEFAULT_MACHINE_CODE))
             .andExpect(jsonPath("$.fileBucket").value(DEFAULT_FILE_BUCKET))
             .andExpect(jsonPath("$.fileName").value(DEFAULT_FILE_NAME))
             .andExpect(jsonPath("$.fileSuffix").value(DEFAULT_FILE_SUFFIX))
@@ -263,6 +271,7 @@ public class SysFileInfoResourceIT {
         // Disconnect from session so that the updates on updatedSysFileInfo are not directly saved in db
         em.detach(updatedSysFileInfo);
         updatedSysFileInfo
+            .machineCode(UPDATED_MACHINE_CODE)
             .fileBucket(UPDATED_FILE_BUCKET)
             .fileName(UPDATED_FILE_NAME)
             .fileSuffix(UPDATED_FILE_SUFFIX)
@@ -283,6 +292,7 @@ public class SysFileInfoResourceIT {
         List<SysFileInfo> sysFileInfoList = sysFileInfoRepository.findAll();
         assertThat(sysFileInfoList).hasSize(databaseSizeBeforeUpdate);
         SysFileInfo testSysFileInfo = sysFileInfoList.get(sysFileInfoList.size() - 1);
+        assertThat(testSysFileInfo.getMachineCode()).isEqualTo(UPDATED_MACHINE_CODE);
         assertThat(testSysFileInfo.getFileBucket()).isEqualTo(UPDATED_FILE_BUCKET);
         assertThat(testSysFileInfo.getFileName()).isEqualTo(UPDATED_FILE_NAME);
         assertThat(testSysFileInfo.getFileSuffix()).isEqualTo(UPDATED_FILE_SUFFIX);

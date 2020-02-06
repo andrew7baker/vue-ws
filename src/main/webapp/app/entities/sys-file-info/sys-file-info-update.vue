@@ -10,6 +10,11 @@
                                v-model="sysFileInfo.id" readonly />
                     </div>
                     <div class="form-group">
+                        <label class="form-control-label" for="sys-file-info-machineCode">Machine Code</label>
+                        <input type="text" class="form-control" name="machineCode" id="sys-file-info-machineCode"
+                            :class="{'valid': !$v.sysFileInfo.machineCode.$invalid, 'invalid': $v.sysFileInfo.machineCode.$invalid }" v-model="$v.sysFileInfo.machineCode.$model" />
+                    </div>
+                    <div class="form-group">
                         <label class="form-control-label" for="sys-file-info-fileBucket">File Bucket</label>
                         <input type="text" class="form-control" name="fileBucket" id="sys-file-info-fileBucket"
                             :class="{'valid': !$v.sysFileInfo.fileBucket.$invalid, 'invalid': $v.sysFileInfo.fileBucket.$invalid }" v-model="$v.sysFileInfo.fileBucket.$model" />

@@ -22,6 +22,9 @@ public class SysFileInfo implements Serializable {
     @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 
+    @Column(name = "machine_code")
+    private String machineCode;
+
     @Column(name = "file_bucket")
     private String fileBucket;
 
@@ -59,6 +62,19 @@ public class SysFileInfo implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getMachineCode() {
+        return machineCode;
+    }
+
+    public SysFileInfo machineCode(String machineCode) {
+        this.machineCode = machineCode;
+        return this;
+    }
+
+    public void setMachineCode(String machineCode) {
+        this.machineCode = machineCode;
     }
 
     public String getFileBucket() {
@@ -212,6 +228,7 @@ public class SysFileInfo implements Serializable {
     public String toString() {
         return "SysFileInfo{" +
             "id=" + getId() +
+            ", machineCode='" + getMachineCode() + "'" +
             ", fileBucket='" + getFileBucket() + "'" +
             ", fileName='" + getFileName() + "'" +
             ", fileSuffix='" + getFileSuffix() + "'" +

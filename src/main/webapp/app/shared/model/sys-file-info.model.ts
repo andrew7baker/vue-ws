@@ -1,5 +1,6 @@
 export interface ISysFileInfo {
   id?: number;
+  machineCode?: string;
   fileBucket?: string;
   fileName?: string;
   fileSuffix?: string;
@@ -15,6 +16,7 @@ export interface ISysFileInfo {
 export class SysFileInfo implements ISysFileInfo {
   constructor(
     public id?: number,
+    public machineCode?: string,
     public fileBucket?: string,
     public fileName?: string,
     public fileSuffix?: string,
