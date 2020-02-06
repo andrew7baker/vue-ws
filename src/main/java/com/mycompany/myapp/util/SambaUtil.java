@@ -206,7 +206,7 @@ public class SambaUtil {
         log.info("【smbfile="+smbfile+"】");
         try {
             if(!smbfile.exists()){
-                System.out.println("no such folder");
+                log.info("【没有此目录】");
             }
             else{
                 SmbFile[] files = smbfile.listFiles();
@@ -247,6 +247,7 @@ public class SambaUtil {
             SysOperationLog sysOperationLog = new SysOperationLog();
             sysOperationLog.setMessage(e.getMessage());
             sysOperationLog.setCreateTime(Instant.now());
+            sysOperationLogService.save(sysOperationLog);
             e.printStackTrace();
         }
     }
