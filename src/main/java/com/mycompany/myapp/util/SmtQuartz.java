@@ -53,6 +53,6 @@ public class SmtQuartz extends QuartzJobBean {
             e.printStackTrace();
         }
 
-        System.out.println("quartz task "+new Date());
+        System.out.println("===quartz task "+new Date());
     }
 }

@@ -244,6 +244,9 @@ public class SambaUtil {
                 }
             }
         } catch (SmbException e) {
+            SysOperationLog sysOperationLog = new SysOperationLog();
+            sysOperationLog.setMessage(e.getMessage());
+            sysOperationLog.setCreateTime(Instant.now());
             e.printStackTrace();
         }
     }

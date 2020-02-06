@@ -55,7 +55,7 @@ public class CommonService {
 
     /**
      * 从字典表取机器列表列表
-     * dicType = MACHINE_CODE
+     * dicType = SMT_MACHINE_CODE
      */
     public List<SysDict> getMachineList(String paramCode){
         // TODO:数据源需要动态取参数
