@@ -201,7 +201,7 @@ public class SambaUtil {
             dir.mkdirs();
         }
         String fileName = "";
-        log.info("【smbfile="+smbfile+"】");
+//        log.info("【smbfile="+smbfile+"】");
         try {
             if(!smbfile.exists()){
                 log.info("【没有此目录】");

@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 @Service
@@ -16,13 +17,15 @@ public class CommonService {
 
     private final Logger log = LoggerFactory.getLogger(CommonService.class);
 
+    @Resource
+    private Jdbi jdbi;
+
     /**
      * 判断是否需要上传 true为需要,false为不需要
      * @param fileName
      * @return
      */
     public boolean getSysFileInfoByName(String fileName){
-        Jdbi jdbi = Jdbi.create("jdbc:postgresql://tx:5432/smt?", "smt", "smt");
         List<SysFileInfo> list =jdbi.withHandle(handle ->
             handle.createQuery("SELECT * from sys_file_info where file_name='"+fileName+"' ")
                 .mapToBean(SysFileInfo.class)
@@ -40,13 +43,12 @@ public class CommonService {
     public String getSingleSysDict(String paramCode){
         // TODO:数据源需要动态取参数
         String returnCode = "";
-        Jdbi jdbi = Jdbi.create("jdbc:postgresql://tx:5432/smt?", "smt", "smt");
-        log.info("jdbi"+jdbi);
+//        log.info("jdbi"+jdbi);
         List<SysDict> list =jdbi.withHandle(handle ->
             handle.createQuery("SELECT d.* from sys_dict d join  sys_dict_type  t on d.dic_type_id=t.id and t.code='"+paramCode+"' ")
                 .mapToBean(SysDict.class)
                 .list());
-        log.info("list"+list);
+        log.info("【list=】"+list);
 
         if(list.size()>0)
             returnCode = ((SysDict)list.get(0)).getCode();
@@ -59,13 +61,12 @@ public class CommonService {
      */
     public List<SysDict> getMachineList(String paramCode){
         // TODO:数据源需要动态取参数
-        Jdbi jdbi = Jdbi.create("jdbc:postgresql://tx:5432/smt?", "smt", "smt");
-        log.info("jdbi"+jdbi);
+//        log.info("jdbi"+jdbi);
         List<SysDict> list =jdbi.withHandle(handle ->
             handle.createQuery("SELECT d.* from sys_dict d join  sys_dict_type  t on d.dic_type_id=t.id and t.code='"+paramCode+"' ")
                 .mapToBean(SysDict.class)
                 .list());
-        log.info("list"+list);
+//        log.info("list"+list);
         return list;
     }
 

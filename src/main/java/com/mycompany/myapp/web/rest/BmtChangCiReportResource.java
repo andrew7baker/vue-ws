@@ -208,16 +208,16 @@ public class BmtChangCiReportResource {
         Map<String, Object> map = new HashMap<>(3);
 
         Jdbi jdbi = Jdbi.create("jdbc:postgresql://tx:5432/smt?", "smt", "smt");
-        log.info("jdbi"+jdbi);
+//        log.info("【jdbi=】"+jdbi);
         List<Production> list =jdbi.withHandle(handle ->
             handle.createQuery("select * from production ")
                 .mapToBean(Production.class)
                 .list());
-        log.info("list"+list);
+//        log.info("【list】"+list);
         Production p =(Production)list.get(0);
 
         String s = p.getPowerTime()+"";
-        log.info("p.getPowerTime()="+p.getPowerTime()+";s="+s);
+//        log.info("【p.getPowerTime()】="+p.getPowerTime()+";s="+s);
         String[][] arrStr=new String[26][2];
         arrStr[0][0]="H_CE";
         arrStr[0][1]="";

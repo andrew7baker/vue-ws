@@ -40,11 +40,13 @@ public class SmtService {
         List<SysDict> list=commonService.getMachineList("SMT_MACHINE_TYPE");
         //用 备注替代 IP地址
         SambaUtil sambaUtil = new SambaUtil(this.sysOperationLogService,this.sysFileInfoService, commonService, productionService, sysRelationService);
+        long curTime =System.currentTimeMillis();
         for(int i=0;i<list.size();i++){
             String url = ((SysDict)list.get(i)).getDescription();
-            log.info("【url="+((SysDict)list.get(i)).getDescription()+"】");
+            log.info("【机器code="+((SysDict)list.get(i)).getCode()+";url="+((SysDict)list.get(i)).getDescription()+"】");
             if(url!=null)
                 sambaUtil.checkRemoteSimpleUrl((SysDict)list.get(i));
         }
+        log.info("【定时任务下拉数据共耗时:"+(System.currentTimeMillis()-curTime)+"毫秒】");
     }
 }

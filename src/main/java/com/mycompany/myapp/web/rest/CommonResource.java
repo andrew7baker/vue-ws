@@ -14,6 +14,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,6 +29,9 @@ public class CommonResource {
     private final Logger log = LoggerFactory.getLogger(CommonResource.class);
 
     private final CommonService commonService;
+
+    @Resource
+    private Jdbi jdbi;
 
     public CommonResource(CommonService commonService) {
         this.commonService = commonService;
@@ -56,7 +60,7 @@ public class CommonResource {
         if(params!=null)
             log.info("prodName="+params.get("prodName").toString()+";machineCode="+params.get("machineCode").toString());
         Map<String, Object> map = new HashMap<>(3);
-        Jdbi jdbi = Jdbi.create("jdbc:postgresql://tx:5432/smt?", "smt", "smt");
+//        Jdbi jdbi = Jdbi.create("jdbc:postgresql://tx:5432/smt?", "smt", "smt");
         log.info("jdbi"+jdbi);
         List<Production> list =jdbi.withHandle(handle ->
             handle.createQuery("select *  from production ")
@@ -77,10 +81,7 @@ public class CommonResource {
      */
     @PostMapping("/getReport")
     public ResponseEntity getReport(@RequestBody Map<String, Object> params) {
-        if(params!=null)
-            log.info("prodName="+params.get("prodName").toString()+";machineCode="+params.get("machineCode").toString());
-
-        Jdbi jdbi = Jdbi.create("jdbc:postgresql://tx:5432/smt?", "smt", "smt");
+        log.info("【jdbi】="+jdbi);
         String sql = "";
         if(params.get("machineCode")!="")
             sql = " and f.machine_code='"+params.get("machineCode").toString()+"'";
@@ -94,7 +95,7 @@ public class CommonResource {
             "(SELECT * FROM sys_dict WHERE dic_type_id IN(SELECT ID from sys_dict_type WHERE code='SMT_MACHINE_TYPE')) d\n" +
             "ON f.machine_code = d.code) f on t.to_id = f.id "
             +sql;
-        log.info("finalSql \n"+finalSql);
+        log.info("【finalSql=】\n"+finalSql);
         List<Map<String, Object>> list =jdbi.withHandle(handle ->
             handle.createQuery( finalSql)
                 .mapToMap()
