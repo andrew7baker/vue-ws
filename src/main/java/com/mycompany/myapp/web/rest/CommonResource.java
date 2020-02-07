@@ -3,6 +3,7 @@ package com.mycompany.myapp.web.rest;
 import com.mycompany.myapp.domain.Production;
 import com.mycompany.myapp.domain.SysFileInfo;
 import com.mycompany.myapp.service.CommonService;
+import com.mycompany.myapp.util.pojo.page.LayuiPageInfo;
 import org.jdbi.v3.core.Handle;
 import org.jdbi.v3.core.Jdbi;
 import org.jdbi.v3.core.generic.GenericType;
@@ -61,12 +62,11 @@ public class CommonResource {
             log.info("prodName="+params.get("prodName").toString()+";machineCode="+params.get("machineCode").toString());
         Map<String, Object> map = new HashMap<>(3);
 //        Jdbi jdbi = Jdbi.create("jdbc:postgresql://tx:5432/smt?", "smt", "smt");
-        log.info("jdbi"+jdbi);
         List<Production> list =jdbi.withHandle(handle ->
             handle.createQuery("select *  from production ")
                 .mapToBean(Production.class)
                 .list());
-        log.info("list"+list);
+//        log.info("list"+list);
         Production p =(Production)list.get(0);
         String s = p.getPowerTime()+"";
         log.info("p.getPowerTime()="+p.getPowerTime()+";s="+s+";list");
@@ -81,12 +81,23 @@ public class CommonResource {
      */
     @PostMapping("/getReport")
     public ResponseEntity getReport(@RequestBody Map<String, Object> params) {
-        log.info("【jdbi】="+jdbi);
         String sql = "";
         if(params.get("machineCode")!="")
             sql = " and f.machine_code='"+params.get("machineCode").toString()+"'";
         if(params.get("prodName")!="")
             sql = sql+" and f.file_name LIKE '%"+params.get("prodName").toString()+"%'";
+
+        String finalSqlCount = "SELECT count(*) " +
+            " from (SELECT r.*,p.* prd_id FROM sys_relation r join production p  on \n" +
+            "p.id=r.from_id) t  JOIN (SELECT f.*,d.name machine_name FROM sys_file_info f JOIN \n" +
+            "(SELECT * FROM sys_dict WHERE dic_type_id IN(SELECT ID from sys_dict_type WHERE code='SMT_MACHINE_TYPE')) d\n" +
+            "ON f.machine_code = d.code) f on t.to_id = f.id "
+            +sql;
+        List<Integer> count =jdbi.withHandle(handle ->
+            handle.select( finalSqlCount)
+                .mapTo(Integer.class)
+                .list());
+        log.info("【count=】"+count.get(0));
 
         String finalSql = "SELECT f.machine_code,f.machine_name,f.file_name,to_char(f.create_time , 'yyyy-mm-dd HH:MI:SS') crea_time,t.operation_rate " +
             ",t.placement_rate,t.mean_time,t.real_time,t.trans_time,t.place_count\n " +
@@ -101,9 +112,12 @@ public class CommonResource {
                 .mapToMap()
                 .list());
 
+        LayuiPageInfo layuiPageInfo = new LayuiPageInfo();
         Map a = new HashMap<>();
         a.put("data",list );
         a.put("pagesize",list );
+        a.put("count",count.get(0) );
+
         return ResponseEntity.ok(a);
     }
 
@@ -116,12 +130,11 @@ public class CommonResource {
         Map<String, Object> map = new HashMap<>(3);
 
         Jdbi jdbi = Jdbi.create("jdbc:postgresql://tx:5432/smt?", "smt", "smt");
-        log.info("jdbi"+jdbi);
         List<Production> list =jdbi.withHandle(handle ->
             handle.createQuery("select * from production ")
                 .mapToBean(Production.class)
                 .list());
-        log.info("list"+list);
+//        log.info("list"+list);
         Production p =(Production)list.get(0);
 
         String s = p.getPowerTime()+"";
