@@ -124,7 +124,7 @@ public class CommonResource {
 
         Map a = new HashMap<>();
         a.put("data",list );
-        a.put("pagesize",3 );
+        a.put("pagesize",20 );
         a.put("count",count.get(0) );
 
         return ResponseEntity.ok(a);
