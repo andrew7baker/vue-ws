@@ -81,41 +81,50 @@ public class CommonResource {
      */
     @PostMapping("/getReport")
     public ResponseEntity getReport(@RequestBody Map<String, Object> params) {
+        int pagesize  = Integer.parseInt(params.get("pagesize").toString()) ;
+        int currentpage = Integer.parseInt(params.get("currentpage").toString()) - 1 ;
+        log.info("【currentpage="+currentpage);
         String sql = "";
+        String sqlPage = "";
         if(params.get("machineCode")!="")
             sql = " and f.machine_code='"+params.get("machineCode").toString()+"'";
         if(params.get("prodName")!="")
             sql = sql+" and f.file_name LIKE '%"+params.get("prodName").toString()+"%'";
+        sqlPage = sql+" limit " + pagesize +" offset "+currentpage*pagesize;
 
+
+        log.info(" 翻页SQL = "+sql);
         String finalSqlCount = "SELECT count(*) " +
             " from (SELECT r.*,p.* prd_id FROM sys_relation r join production p  on \n" +
             "p.id=r.from_id) t  JOIN (SELECT f.*,d.name machine_name FROM sys_file_info f JOIN \n" +
             "(SELECT * FROM sys_dict WHERE dic_type_id IN(SELECT ID from sys_dict_type WHERE code='SMT_MACHINE_TYPE')) d\n" +
             "ON f.machine_code = d.code) f on t.to_id = f.id "
             +sql;
+
+        log.info(" 翻页finalSqlCount = "+finalSqlCount);
         List<Integer> count =jdbi.withHandle(handle ->
             handle.select( finalSqlCount)
                 .mapTo(Integer.class)
                 .list());
         log.info("【count=】"+count.get(0));
 
-        String finalSql = "SELECT f.machine_code,f.machine_name,f.file_name,to_char(f.create_time , 'yyyy-mm-dd HH:MI:SS') crea_time,t.operation_rate " +
+        String finalSqlPage = "SELECT f.machine_code,f.machine_name,f.file_name,to_char(f.create_time , 'yyyy-mm-dd HH:MI:SS') crea_time,t.operation_rate " +
             ",t.placement_rate,t.mean_time,t.real_time,t.trans_time,t.place_count\n " +
             " from (SELECT r.*,p.* prd_id FROM sys_relation r join production p  on \n" +
             "p.id=r.from_id) t  JOIN (SELECT f.*,d.name machine_name FROM sys_file_info f JOIN \n" +
             "(SELECT * FROM sys_dict WHERE dic_type_id IN(SELECT ID from sys_dict_type WHERE code='SMT_MACHINE_TYPE')) d\n" +
             "ON f.machine_code = d.code) f on t.to_id = f.id "
-            +sql;
-        log.info("【finalSql=】\n"+finalSql);
+            +sqlPage
+            ;
+        log.info("【finalSqlPage=】\n"+finalSqlPage);
         List<Map<String, Object>> list =jdbi.withHandle(handle ->
-            handle.createQuery( finalSql)
+            handle.createQuery( finalSqlPage)
                 .mapToMap()
                 .list());
 
-        LayuiPageInfo layuiPageInfo = new LayuiPageInfo();
         Map a = new HashMap<>();
         a.put("data",list );
-        a.put("pagesize",list );
+        a.put("pagesize",3 );
         a.put("count",count.get(0) );
 
         return ResponseEntity.ok(a);

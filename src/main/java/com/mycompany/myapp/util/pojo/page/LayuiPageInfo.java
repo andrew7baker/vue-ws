@@ -36,4 +36,6 @@ public class LayuiPageInfo {
 
     private long count;
 
+    private long pagesize = 20;
+
 }
