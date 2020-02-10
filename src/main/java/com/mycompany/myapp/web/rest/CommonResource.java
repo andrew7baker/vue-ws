@@ -217,16 +217,13 @@ public class CommonResource {
     @PostMapping("/emptyRelation")
     public ResponseEntity
     emptyRelation(@RequestBody Map<String, Object> params) {
-        if(params!=null)
-            log.info("prodName="+params.get("prodName").toString()+";machineCode="+params.get("machineCode").toString());
-        Map<String, Object> map = new HashMap<>(3);
-
         jdbi.useHandle(handle -> {
-            handle.execute("delete sys_relation where id in (SELECT r.id FROM sys_relation r join production p  on p.id=r.from_id)");
-            handle.execute("delete from production");
             handle.execute("delete from sys_file_info");
+            handle.execute("delete from sys_relation where id in (SELECT r.id FROM sys_relation r join production p  on p.id=r.from_id)");
+            handle.execute("delete from production");
         });
-
+        log.info("【清空数据】");
+        Map<String, Object> map = new HashMap<>(3);
         Map a = new HashMap<>();
         return ResponseEntity.ok(a);
     }
