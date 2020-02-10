@@ -77,6 +77,7 @@ public class CommonResource {
 
     /**
      * 110 机器
+     * 111simple-query.html
      * @return
      */
     @PostMapping("/getReport")
@@ -131,21 +132,20 @@ public class CommonResource {
     }
 
     /**
-     * 取得明显列表
+     * file-detail.html 查看明显
      * @return
      */
-    @GetMapping("/getReportDetail")
-    public Map<String, Object> getSmtMap(@RequestBody Map<String, Object> params) {
-        Map<String, Object> map = new HashMap<>(3);
+    @PostMapping("/showProdDetail")
+    public ResponseEntity showProdDetail(@RequestBody Map<String, Object> params) {
+        log.info("prodId="+params.get("prodId"));
+        int prodId  = Integer.parseInt(params.get("prodId").toString()) ;
+//        int prodId = 12059;
 
-        Jdbi jdbi = Jdbi.create("jdbc:postgresql://tx:5432/smt?", "smt", "smt");
         List<Production> list =jdbi.withHandle(handle ->
-            handle.createQuery("select * from production ")
+            handle.createQuery("select * from production where id = "+prodId)
                 .mapToBean(Production.class)
                 .list());
-//        log.info("list"+list);
         Production p =(Production)list.get(0);
-
         String s = p.getPowerTime()+"";
         log.info("p.getPowerTime()="+p.getPowerTime()+";s="+s);
         String[][] arrStr=new String[26][2];
@@ -203,8 +203,9 @@ public class CommonResource {
         arrStr[24][1]= ""+p.getPlaceCount();
         arrStr[25][1]= ""+p.getTheEfficiency();
 
-        map.put("data", arrStr);
-        return map;
+        Map a = new HashMap<>();
+        a.put("data", arrStr);
+        return ResponseEntity.ok(a);
     }
 
     /**
