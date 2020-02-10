@@ -111,6 +111,7 @@ public class CommonResource {
 
         String finalSqlPage = "SELECT f.machine_code,f.machine_name,f.file_name,to_char(f.create_time , 'yyyy-mm-dd HH:MI:SS') crea_time,t.operation_rate " +
             ",t.placement_rate,t.mean_time,t.real_time,t.trans_time,t.place_count\n " +
+            ",t.from_id prod_id "+
             " from (SELECT r.*,p.* prd_id FROM sys_relation r join production p  on \n" +
             "p.id=r.from_id) t  JOIN (SELECT f.*,d.name machine_name FROM sys_file_info f JOIN \n" +
             "(SELECT * FROM sys_dict WHERE dic_type_id IN(SELECT ID from sys_dict_type WHERE code='SMT_MACHINE_TYPE')) d\n" +
