@@ -1,7 +1,7 @@
 <template>
     <div>
         <h2 id="page-heading">
-            <span id="sys-operation-log-heading">Sys Operation Logs</span>
+            <span id="sys-operation-log-heading">日志记录</span>
             <router-link :to="{name: 'SysOperationLogCreate'}" tag="button" id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-sys-operation-log">
                 <font-awesome-icon icon="plus"></font-awesome-icon>
                 <span >

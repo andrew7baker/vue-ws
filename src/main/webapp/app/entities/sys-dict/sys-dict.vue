@@ -1,7 +1,7 @@
 <template>
     <div>
         <h2 id="page-heading">
-            <span id="sys-dict-heading">Sys Dicts</span>
+            <span id="sys-dict-heading">数据字典</span>
             <router-link :to="{name: 'SysDictCreate'}" tag="button" id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-sys-dict">
                 <font-awesome-icon icon="plus"></font-awesome-icon>
                 <span >

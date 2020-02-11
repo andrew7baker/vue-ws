@@ -1,7 +1,7 @@
 <template>
     <div>
         <h2 id="page-heading">
-            <span id="sys-file-info-heading">Sys File Infos</span>
+            <span id="sys-file-info-heading">同步文件记录</span>
             <router-link :to="{name: 'SysFileInfoCreate'}" tag="button" id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-sys-file-info">
                 <font-awesome-icon icon="plus"></font-awesome-icon>
                 <span >

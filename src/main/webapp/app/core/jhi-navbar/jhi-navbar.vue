@@ -43,7 +43,7 @@
                     </b-dropdown-item>
                     <b-dropdown-item to="/sys-dict">
                         <font-awesome-icon icon="asterisk" />
-                        <span >SysDict</span>
+                        <span >数据字典</span>
                     </b-dropdown-item>
                     <b-dropdown-item to="/sys-dict-type">
                         <font-awesome-icon icon="asterisk" />
@@ -63,11 +63,11 @@
                     </b-dropdown-item>
                     <b-dropdown-item to="/sys-file-info">
                         <font-awesome-icon icon="asterisk" />
-                        <span >SysFileInfo</span>
+                        <span >同步文件记录</span>
                     </b-dropdown-item>
                     <b-dropdown-item to="/sys-operation-log">
                         <font-awesome-icon icon="asterisk" />
-                        <span >SysOperationLog</span>
+                        <span >日志记录</span>
                     </b-dropdown-item>
                     <!-- jhipster-needle-add-entity-to-menu - JHipster will add entities to the menu here -->
                 </b-nav-item-dropdown>
