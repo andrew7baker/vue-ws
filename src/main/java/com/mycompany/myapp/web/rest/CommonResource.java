@@ -132,6 +132,62 @@ public class CommonResource {
         return ResponseEntity.ok(a);
     }
 
+    @PostMapping("/getReport2")
+    public ResponseEntity getReport(String machineCode,String prodName,int pagesize,int currentpage) {
+//        int pagesize  = Integer.parseInt(params.get("pagesize").toString()) ;
+        currentpage = currentpage - 1 ;
+        log.info("【currentpage="+currentpage);
+        String sql = "";
+        String sqlPage = "";
+//        log.info("machineCode!=null"+machineCode!=null);
+        if (machineCode != null ) {
+            log.info("machineCode===="+machineCode);
+            sql = " and f.machine_code='"+machineCode+"'";
+        }
+
+        if(prodName != null)
+            sql = sql+" and f.file_name LIKE '%"+prodName+"%'";
+        sqlPage = sql+" limit " + pagesize +" offset "+currentpage*pagesize;
+
+
+        log.info(" 翻页SQL = "+sql);
+        String finalSqlCount = "SELECT count(*) " +
+            " from (SELECT r.*,p.* prd_id FROM sys_relation r join production p  on \n" +
+            "p.id=r.from_id) t  JOIN (SELECT f.*,d.name machine_name FROM sys_file_info f JOIN \n" +
+            "(SELECT * FROM sys_dict WHERE dic_type_id IN(SELECT ID from sys_dict_type WHERE code='SMT_MACHINE_TYPE')) d\n" +
+            "ON f.machine_code = d.code) f on t.to_id = f.id "
+            +sql;
+
+        log.info(" 翻页finalSqlCount = "+finalSqlCount);
+        List<Integer> count =jdbi.withHandle(handle ->
+            handle.select( finalSqlCount)
+                .mapTo(Integer.class)
+                .list());
+        log.info("【count=】"+count.get(0));
+
+        String finalSqlPage = "SELECT f.machine_code,f.machine_name,f.file_name,to_char(f.create_time , 'yyyy-mm-dd HH:MI:SS') crea_time,t.operation_rate " +
+            ",t.placement_rate,t.mean_time,t.real_time,t.trans_time,t.place_count\n " +
+            ",t.from_id prod_id "+
+            " from (SELECT r.*,p.* prd_id FROM sys_relation r join production p  on \n" +
+            "p.id=r.from_id) t  JOIN (SELECT f.*,d.name machine_name FROM sys_file_info f JOIN \n" +
+            "(SELECT * FROM sys_dict WHERE dic_type_id IN(SELECT ID from sys_dict_type WHERE code='SMT_MACHINE_TYPE')) d\n" +
+            "ON f.machine_code = d.code) f on t.to_id = f.id "
+            +sqlPage
+            ;
+        log.info("【finalSqlPage=】\n"+finalSqlPage);
+        List<Map<String, Object>> list =jdbi.withHandle(handle ->
+            handle.createQuery( finalSqlPage)
+                .mapToMap()
+                .list());
+
+        Map a = new HashMap<>();
+        a.put("data",list );
+        a.put("pagesize",20 );
+        a.put("count",count.get(0) );
+
+        return ResponseEntity.ok(a);
+    }
+
     /**
      * file-detail.html 查看明显
      * @return
