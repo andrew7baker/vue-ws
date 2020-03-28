@@ -354,15 +354,19 @@ public class CommonResource {
                 "substr(split_part(f.file_name,'_',(array_upper(regexp_split_to_array(f.file_name,'_'),1)-1)), 9, 9) create_time,\n" +
                 "substr(split_part(split_part(f.file_name,'_',array_upper(regexp_split_to_array(f.file_name,'_'),1)), '.', 1), 0,9) end_date,\n" +
                 "substr(split_part(split_part(f.file_name,'_',array_upper(regexp_split_to_array(f.file_name,'_'),1)), '.', 1), 9,4)  end_time,\n" +
-                "111 total_time,t.panel_count,t.p_cb_count," +
+                "total_time,t.panel_count,t.p_cb_count," +
                 "case when panel_count=0 then null else round(t.p_cb_count/t.panel_count) end pingshu, \n" +
                 "t.mean_time,t.trans_time,t.real_time,t.idle_time,\n" +
                 "t.place_count,t.from_id prod_id,f.file_name,f.machine_code" +
             " from (SELECT " +
-                "r.*,p.* prd_id FROM sys_relation r join production p  on \n" +
+                "r.*,p.* prd_id FROM sys_relation r join " +
+                "((select \n" +
+                "sum(place_time+wait_time+run_time+stop_time+idle_time+in_wait_time+out_wait_time+trans_time+wrong_stop_time+error_stop_t_ime)/3600 total_time,\n" +
+                "* FROM production GROUP BY ID)) p  on \n" +
             "p.id=r.from_id) t  JOIN (SELECT f.*,d.name machine_name FROM sys_file_info f JOIN \n" +
             "(SELECT * FROM sys_dict WHERE dic_type_id IN(SELECT ID from sys_dict_type WHERE code='SMT_MACHINE_TYPE')) d\n" +
-            "ON f.machine_code = d.code) f on t.to_id = f.id "
+            "ON f.machine_code = d.code) f on t.to_id = f.id " +
+                "and f.file_name!='Total.log'"  //去除掉汇总的日志
             +sqlPage
             ;
         log.info("【finalSqlPage=】\n"+finalSqlPage);
