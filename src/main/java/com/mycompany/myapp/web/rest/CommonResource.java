@@ -310,7 +310,7 @@ public class CommonResource {
     @ApiImplicitParams({
         @ApiImplicitParam(name = "machineCode", value = "机器编码", dataType = "string", paramType = "query"),
         @ApiImplicitParam(name = "prodName", value = "产品名称", dataType = "string", paramType = "query"),
-        @ApiImplicitParam(name = "pageSize", value = "翻页大小", dataType = "string", paramType = "query",example = "20"),
+        @ApiImplicitParam(name = "pageSize", value = "翻页大小", dataType = "string", paramType = "query",example = "100"),
         @ApiImplicitParam(name = "currentPage", value = "当前页", dataType = "string", paramType = "query",example = "1")
     })
     @PostMapping("/v3/getReport")
@@ -354,14 +354,44 @@ public class CommonResource {
                 "substr(split_part(f.file_name,'_',(array_upper(regexp_split_to_array(f.file_name,'_'),1)-1)), 9, 9) create_time,\n" +
                 "substr(split_part(split_part(f.file_name,'_',array_upper(regexp_split_to_array(f.file_name,'_'),1)), '.', 1), 0,9) end_date,\n" +
                 "substr(split_part(split_part(f.file_name,'_',array_upper(regexp_split_to_array(f.file_name,'_'),1)), '.', 1), 9,4)  end_time,\n" +
+                "CASE \n" +
+                " WHEN LENGTH(split_part(f.file_name,'_',(array_upper(regexp_split_to_array(f.file_name,'_'),1)-1)))=14 THEN\n" +
+                "  date_part('h', \n" +
+                "  TO_TIMESTAMP(\n" +
+                "  split_part(split_part(f.file_name,'_',array_upper(regexp_split_to_array(f.file_name,'_'),1)), '.', 1)\n" +
+                "  ,'YYYYMMDDHH24MI')::timestamp\n" +
+                "  - \n" +
+                "  TO_TIMESTAMP(\n" +
+                "  split_part(f.file_name,'_',(array_upper(regexp_split_to_array(f.file_name,'_'),1)-1))\n" +
+                "  ,'YYYYMMDDHH24MISS') ::timestamp \n" +
+                "  )   \n" +
+                " ELSE\n" +
+                "  date_part('day', now()::timestamp - '2013-01-14 16:05'::timestamp)\n" +
+                "END "+
                 "total_time,t.panel_count,t.p_cb_count," +
                 "case when panel_count=0 then null else round(t.p_cb_count/t.panel_count) end pingshu, \n" +
-                "t.mean_time,t.trans_time,t.real_time,t.idle_time,\n" +
-                "t.place_count,t.from_id prod_id,f.file_name,f.machine_code" +
+                "t.mean_time,t.trans_time,t.real_time,t.transfer_time,t.idle_time,\n" +
+                "t.place_count,t.from_id prod_id,f.file_name,f.machine_code," +
+                " jiagong_time,"+
+                "CASE \n" +
+                " WHEN LENGTH(split_part(f.file_name,'_',(array_upper(regexp_split_to_array(f.file_name,'_'),1)-1)))=14 THEN\n" +
+                "  cast(date_part('h', \n" +
+                "  TO_TIMESTAMP(\n" +
+                "  split_part(split_part(f.file_name,'_',array_upper(regexp_split_to_array(f.file_name,'_'),1)), '.', 1)\n" +
+                "  ,'YYYYMMDDHH24MI')::timestamp\n" +
+                "  - \n" +
+                "  TO_TIMESTAMP(\n" +
+                "  split_part(f.file_name,'_',(array_upper(regexp_split_to_array(f.file_name,'_'),1)-1))\n" +
+                "  ,'YYYYMMDDHH24MISS') ::timestamp \n" +
+                "  ) - jiagong_time AS decimal(10,2) ) \n" +
+                " ELSE\n" +
+                "  cast(date_part('day', now()::timestamp - '2013-01-14 16:05'::timestamp) - jiagong_time AS decimal(10,2))  \n" +
+                "END "+
+                "tingji_time"+
             " from (SELECT " +
                 "r.*,p.* prd_id FROM sys_relation r join " +
                 "((select \n" +
-                "sum(place_time+wait_time+run_time+stop_time+idle_time+in_wait_time+out_wait_time+trans_time+wrong_stop_time+error_stop_t_ime)/3600 total_time,\n" +
+                "cast(0.9*p_cb_count*(mean_time+transfer_time)/3600 AS decimal(10,2)) jiagong_time,\n" +
                 "* FROM production GROUP BY ID)) p  on \n" +
             "p.id=r.from_id) t  JOIN (SELECT f.*,d.name machine_name FROM sys_file_info f JOIN \n" +
             "(SELECT * FROM sys_dict WHERE dic_type_id IN(SELECT ID from sys_dict_type WHERE code='SMT_MACHINE_TYPE')) d\n" +
@@ -377,7 +407,7 @@ public class CommonResource {
 
         Map a = new HashMap<>();
         a.put("data",list );
-        a.put("pagesize",20 );
+        a.put("pagesize",intPageSize );
         a.put("count",count.get(0) );
 
         return ResponseEntity.ok(a);
